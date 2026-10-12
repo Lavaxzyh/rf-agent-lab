@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import './cases/cases.css'
+const CaseStudies = lazy(() => import('./cases/CaseStudies'))
 
 type Article = {
   slug: string
@@ -35,9 +37,9 @@ type WorkflowStep = {
   description: string
 }
 
-type PanelId = 'hero' | 'skills' | 'mcp' | 'demos' | 'paper2hfss' | 'docs'
+type PanelId = 'hero' | 'skills' | 'mcp' | 'demos' | 'paper2hfss' | 'cases' | 'docs'
 
-const panelIds: PanelId[] = ['hero', 'skills', 'mcp', 'demos', 'paper2hfss', 'docs']
+const panelIds: PanelId[] = ['hero', 'skills', 'mcp', 'demos', 'paper2hfss', 'cases', 'docs']
 
 type ArrayParameters = {
   nx: number
@@ -68,6 +70,7 @@ function arrayFactor(size: number, phase: number) {
 function ArrayPatternDemo() {
   const [parameters, setParameters] = useState<ArrayParameters>(defaultArrayParameters)
   const [autoRotate, setAutoRotate] = useState(false)
+  const [webglUnavailable, setWebglUnavailable] = useState(false)
   const stageRef = useRef<HTMLDivElement | null>(null)
   const updatePatternRef = useRef<(next: ArrayParameters) => void>(() => undefined)
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
@@ -85,7 +88,9 @@ function ArrayPatternDemo() {
     camera.position.set(defaultCameraPosition.x, defaultCameraPosition.y, defaultCameraPosition.z)
     cameraRef.current = camera
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
+    let renderer: THREE.WebGLRenderer
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false }) }
+    catch { cameraRef.current = null; setWebglUnavailable(true); return }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     stage.appendChild(renderer.domElement)
@@ -306,6 +311,7 @@ function ArrayPatternDemo() {
         <p className="demo-hint">调整阵元数量、间距与扫描方向，实时观察三维归一化阵因子。拖动波束查看空间形态；此演示用于直观理解，不替代全波仿真。</p>
       </div>
       <div className="array-canvas-wrap">
+        {webglUnavailable && <p className="webgl-notice" role="status">当前浏览器无法启用 WebGL，三维波束展示暂不可用。其他栏目仍可正常阅读。</p>}
         <div
           ref={stageRef}
           className="array-three-stage"
@@ -510,6 +516,7 @@ function renderMarkdown(body: string) {
 
 export default function App() {
   const [activeArticle, setActiveArticle] = useState<string | null>(null)
+  const [activeCase, setActiveCase] = useState<string | null>(null)
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
   const [activePanel, setActivePanel] = useState<PanelId>('hero')
@@ -519,14 +526,21 @@ export default function App() {
     mcp: null,
     demos: null,
     paper2hfss: null,
+    cases: null,
     docs: null,
   })
 
   useEffect(() => {
     const onHashChange = () => {
-      setActiveArticle(window.location.hash.startsWith('#/docs/')
-        ? window.location.hash.replace('#/docs/', '')
-        : null)
+      const hash = window.location.hash
+      setActiveArticle(hash.startsWith('#/docs/') ? hash.slice('#/docs/'.length) : null)
+      setActiveCase(hash.startsWith('#/cases/') ? hash.slice('#/cases/'.length) : null)
+      if (hash.startsWith('#/docs')) setActivePanel('docs')
+      else if (hash.startsWith('#/cases/')) setActivePanel('cases')
+      else {
+        const id = hash.slice(1) as PanelId
+        setActivePanel(panelIds.includes(id) ? id : 'hero')
+      }
     }
 
     onHashChange()
@@ -542,7 +556,16 @@ export default function App() {
     docsPanel.scrollTo({ top: 0, behavior: 'smooth' })
   }, [activeArticle])
 
-  const categories = ['All', ...Array.from(new Set(articles.map((article) => article.category)))]
+  useEffect(() => {
+    const revealActive = () => document.querySelector('.nav-links button.active')?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' })
+    revealActive()
+    window.addEventListener('resize', revealActive)
+    return () => window.removeEventListener('resize', revealActive)
+  }, [activePanel])
+
+  const categories = ['All', '复现案例', ...Array.from(new Set(articles.map((article) => article.category)))]
+  const showCaseInDocs = (category === 'All' || category === '复现案例') &&
+    '二维码 网格 贴片 天线 论文 复现 AI HFSS CST FEKO S11'.toLowerCase().includes(query.trim().toLowerCase())
 
   const filteredArticles = useMemo(() => {
     const term = query.toLowerCase()
@@ -557,6 +580,7 @@ export default function App() {
 
   const scrollToPanel = (id: PanelId) => {
     setActivePanel(id)
+    window.location.hash = id
   }
 
   return (
@@ -576,7 +600,7 @@ export default function App() {
               onClick={() => scrollToPanel(id)}
               aria-label={`Go to ${id}`}
             >
-              {id === 'paper2hfss' ? 'Paper2HFSS' : id === 'demos' ? 'Visual Lab' : id}
+              {id === 'paper2hfss' ? 'Paper2HFSS' : id === 'demos' ? 'Visual Lab' : id === 'cases' ? '案例广场' : id}
             </button>
           ))}
         </nav>
@@ -808,7 +832,14 @@ export default function App() {
                   Follow Paper2HFSS <span>→</span>
                 </a>
               </div>
+              <a className="case-teaser" href="#/cases/qr-grid-patch">
+                <div><p className="eyebrow">FEATURED CASE / AI 辅助研究实践</p><strong>二维码网格贴片天线 · 跨三种求解器的论文复现</strong><p>共同的几何与材料，三种数值方法。探索真实结构、S11 曲线与误差分析。</p></div><span>↗</span>
+              </a>
             </div>
+          </section>
+
+          <section id="cases" ref={(node) => { panelRefs.current.cases = node }} className={`panel ${activePanel === 'cases' ? 'panel-active' : ''}`}>
+            {activePanel === 'cases' && <Suspense fallback={<div className="panel-inner"><p className="eyebrow">Loading case studies…</p></div>}><CaseStudies selected={activeCase} /></Suspense>}
           </section>
 
           <section
@@ -821,7 +852,7 @@ export default function App() {
             <div className="panel-inner docs-inner">
               <div className="section-heading">
                 <div>
-                  <p className="eyebrow">05 / TECHNICAL NOTES</p>
+                  <p className="eyebrow">06 / TECHNICAL NOTES</p>
                   <h2>
                     Make the process<br />
                     <em>shareable.</em>
@@ -858,11 +889,12 @@ export default function App() {
                   </div>
 
                   <div className="article-list">
+                    {showCaseInDocs && <a className="article-row featured" href="#/cases/qr-grid-patch"><div className="article-date">2026-08-04<span>交互案例</span></div><div><span className="article-category">复现案例 · AI 辅助</span><h3>二维码网格贴片天线：跨三种求解器的论文复现</h3><p>来源明确的真实研究案例：三维层叠结构、HFSS / CST / FEKO 曲线与误差分析。</p><div className="tag-row"><span>#HFSS</span><span>#CST</span><span>#FEKO</span><span>#S11</span></div></div><span className="article-arrow">→</span></a>}
                     {filteredArticles.map((item) => (
                       <a
                         className={`article-row ${item.featured ? 'featured' : ''}`}
                         href={`#/docs/${item.slug}`}
-                        onClick={() => scrollToPanel('docs')}
+                        onClick={() => setActivePanel('docs')}
                         key={item.slug}
                       >
                         <div className="article-date">
@@ -882,7 +914,7 @@ export default function App() {
                         <span className="article-arrow">→</span>
                       </a>
                     ))}
-                    {filteredArticles.length === 0 && <p className="empty-state">No notes match this search yet.</p>}
+                    {filteredArticles.length === 0 && !showCaseInDocs && <p className="empty-state">No notes match this search yet.</p>}
                   </div>
                 </>
               )}
