@@ -10,9 +10,29 @@ const page = await context.newPage()
 const errors = []
 page.on('pageerror', (error) => errors.push(error.message))
 try {
-  await page.goto(`${url}/#paper2hfss`)
-  await page.locator('.case-teaser').waitFor()
-  assert.notEqual(await page.locator('.case-teaser').evaluate((el) => getComputedStyle(el).borderStyle), 'none')
+  await page.goto(`${url}/#hero`)
+  await page.getByRole('button', { name: 'Go to skills', exact: true }).click()
+  assert.equal(await page.locator('#skills .skill-card').count(), 1)
+  assert.equal(await page.locator('#skills .skill-card h3').innerText(), 'Codex Profile Switch')
+  await page.screenshot({ path: '.local-preview/skills-real-project.png' })
+  await page.getByRole('button', { name: 'Go to mcp', exact: true }).click()
+  assert.equal(await page.locator('#mcp .mcp-card h3').first().innerText(), 'ads-mcp')
+  assert.equal(await page.locator('#mcp .mcp-card a').first().getAttribute('href'), 'https://github.com/Lavaxzyh/ads-mcp')
+  assert.equal(await page.locator('#mcp .mcp-card-featured').count(), 1)
+  assert.equal(await page.locator('#mcp .mcp-planned-note').count(), 6)
+  await page.screenshot({ path: '.local-preview/mcp-pinned-project.png' })
+  const docsEnabled = await page.getByRole('button', { name: 'Go to docs', exact: true }).count() > 0
+  const paperEnabled = await page.getByRole('button', { name: 'Go to paper2hfss', exact: true }).count() > 0
+  if (paperEnabled) {
+    await page.goto(`${url}/#paper2hfss`)
+    await page.locator('.case-teaser').waitFor()
+    assert.notEqual(await page.locator('.case-teaser').evaluate((el) => getComputedStyle(el).borderStyle), 'none')
+  } else {
+    await page.goto(`${url}/#paper2hfss`)
+    await page.locator('#hero.panel-active').waitFor()
+    assert.equal(await page.locator('#paper2hfss').count(), 0)
+    assert.equal(await page.evaluate(() => location.hash), '#hero')
+  }
   await page.getByRole('button', { name: 'Go to cases', exact: true }).click()
   await page.locator('.case-feature').waitFor()
   await page.screenshot({ path: '.local-preview/cases-desktop.png' })
@@ -56,10 +76,12 @@ try {
   await page.locator('.case-source').waitFor()
   await page.goForward()
   await page.locator('.case-feature').waitFor()
-  await page.getByRole('button', { name: 'Go to docs', exact: true }).click()
-  await page.getByRole('button', { name: '复现案例', exact: true }).click()
-  assert.equal(await page.locator('.article-row:visible').count(), 1)
-  await page.locator('.article-row:visible').click()
+  if (docsEnabled) {
+    await page.getByRole('button', { name: 'Go to docs', exact: true }).click()
+    await page.getByRole('button', { name: '复现案例', exact: true }).click()
+    assert.equal(await page.locator('.article-row:visible').count(), 1)
+    await page.locator('.article-row:visible').click()
+  } else await page.locator('.case-feature').click()
   await page.locator('.case-source').waitFor()
   for (const [name, width, height] of [['tablet', 834, 1112], ['mobile', 390, 844], ['narrow', 320, 740]]) {
     await page.setViewportSize({ width, height })
@@ -70,15 +92,31 @@ try {
     await page.locator('.chart-card').scrollIntoViewIfNeeded()
     await page.screenshot({ path: `.local-preview/chart-${name}.png` })
   }
-  await page.goto(`${url}/#/docs/hfss-automation-boundaries`)
-  await page.locator('.article-detail').waitFor()
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 })
+    await page.getByRole('button', { name: 'Go to mcp', exact: true }).click()
+    assert(await page.locator('.mcp-card-featured').evaluate((el) => el.scrollWidth <= el.clientWidth), `MCP card overflow at ${width}`)
+    await page.locator('.mcp-card-featured').screenshot({ path: `.local-preview/mcp-${width}.png` })
+  }
+  if (docsEnabled) {
+    await page.goto(`${url}/#/docs/hfss-automation-boundaries`)
+    await page.locator('.article-detail').waitFor()
+  } else {
+    for (const hash of ['#docs', '#/docs', '#/docs/hfss-automation-boundaries']) {
+      await page.goto(`${url}/${hash}`)
+      await page.locator('#hero.panel-active').waitFor()
+      assert.equal(await page.locator('#docs').count(), 0)
+      assert.equal(await page.evaluate(() => location.hash), '#hero')
+    }
+    assert.equal(await page.locator('a[href^="#/docs"], a[href="#docs"], a[href="#paper2hfss"]').count(), 0)
+  }
   await page.getByRole('button', { name: 'Go to demos', exact: true }).click()
   await page.locator('#demos canvas').waitFor()
   const staticFigure = await context.request.get(`${url}/cases/qr-grid-patch/s11-comparison.svg`)
   assert(staticFigure.ok(), 'Static scientific plot is missing')
   assert.match(await staticFigure.text(), /<svg/)
   assert.deepEqual(errors, [], 'Uncaught page errors')
-  console.log('PASS: sources, model controls, curve toggles, all frequency windows, solver settings, boundary metrics, history, old routes, responsive overflow, static SVG; screenshots in .local-preview')
+  console.log('PASS: real Skill only, pinned ads-mcp, hidden section routes, sources, model controls, curves, metrics, history, responsive layout, static SVG; screenshots in .local-preview')
 } finally { await browser.close() }
 const fallbackBrowser = await chromium.launch({ executablePath, headless: true, args: ['--disable-webgl'] })
 try {

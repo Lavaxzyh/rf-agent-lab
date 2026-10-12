@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './cases/cases.css'
+import { isPanelEnabled, type PanelId } from './site-config'
 const CaseStudies = lazy(() => import('./cases/CaseStudies'))
 
 type Article = {
@@ -29,6 +30,8 @@ type MCPItem = {
   description: string
   status: string
   flow: string
+  href?: string
+  featured?: boolean
 }
 
 type WorkflowStep = {
@@ -37,9 +40,8 @@ type WorkflowStep = {
   description: string
 }
 
-type PanelId = 'hero' | 'skills' | 'mcp' | 'demos' | 'paper2hfss' | 'cases' | 'docs'
-
 const panelIds: PanelId[] = ['hero', 'skills', 'mcp', 'demos', 'paper2hfss', 'cases', 'docs']
+const visiblePanelIds = panelIds.filter(isPanelEnabled)
 
 type ArrayParameters = {
   nx: number
@@ -371,85 +373,51 @@ const skills: Skill[] = [
     tags: ['Codex', 'Workflow'],
     href: 'https://github.com/Lavaxzyh/codex-profile-switch',
   },
-  {
-    name: 'HFSS / PyAEDT',
-    description: 'Turn modeling, setup and export steps into reusable automation instead of one-off clicks.',
-    level: 'Core',
-    tags: ['HFSS', 'PyAEDT'],
-  },
-  {
-    name: 'Antenna Design',
-    description: 'From radiation mechanism to gain tradeoffs, build designs you can reason about and reproduce.',
-    level: 'Research',
-    tags: ['Antenna', 'EM'],
-  },
-  {
-    name: 'Microwave Engineering',
-    description: 'A structured map of transmission lines, filters and high-frequency system behavior.',
-    level: 'Foundation',
-    tags: ['RF', 'Microwave'],
-  },
-  {
-    name: 'EM Simulation',
-    description: 'Treat boundary conditions, meshing and convergence as verification tools, not decorations.',
-    level: 'Core',
-    tags: ['Simulation', 'Validation'],
-  },
-  {
-    name: 'AI Agent Workflow',
-    description: 'Let the model understand engineering context and coordinate tools with explicit checkpoints.',
-    level: 'Exploring',
-    tags: ['AI', 'Agent'],
-  },
-  {
-    name: 'Python Automation',
-    description: 'Connect data, geometry, simulation and reports with scripts that reduce repeated manual work.',
-    level: 'Core',
-    tags: ['Python', 'Automation'],
-  },
-  {
-    name: 'Technical Writing',
-    description: 'Turn complex RF decisions into reusable technical notes that others can inspect and extend.',
-    level: 'Practice',
-    tags: ['Docs', 'Research'],
-  },
 ]
 
 const mcps: MCPItem[] = [
   {
+    name: 'ads-mcp',
+    description: '面向 Keysight ADS 的开源 MCP 服务，以无界面工作流连接原理图构建、网表生成、hpeesofsim 仿真、S 参数读取与 Touchstone 导出。运行需要本机已授权的 ADS。',
+    status: 'Open Source',
+    flow: 'Schematic → Simulation → S-parameters',
+    href: 'https://github.com/Lavaxzyh/ads-mcp',
+    featured: true,
+  },
+  {
     name: 'AEDT / HFSS MCP',
     description: 'Expose local HFSS control as a reviewable engineering tool instead of a black box action.',
-    status: 'Verified',
+    status: 'Planned',
     flow: 'Paper -> HFSS',
   },
   {
     name: 'PyAEDT Automation',
     description: 'Parameterize geometry, ports and setup definitions for minimal-repeatability experiments.',
-    status: 'Prototype',
+    status: 'Planned',
     flow: 'Script -> Model',
   },
   {
     name: 'Paper Parsing Agent',
     description: 'Extract geometry, material and simulation clues from PDF pages, figures and tables.',
-    status: 'Exploring',
+    status: 'Planned',
     flow: 'Paper -> Params',
   },
   {
     name: 'Simulation Verification',
     description: 'Compare simulated curves and metrics with paper evidence before claiming a match.',
-    status: 'Prototype',
+    status: 'Planned',
     flow: 'Run -> Evidence',
   },
   {
     name: 'Result Extraction',
     description: 'Convert S-parameters, gain, efficiency and plots into structured data for review.',
-    status: 'Exploring',
+    status: 'Planned',
     flow: 'HFSS -> Report',
   },
   {
     name: 'Optimization Loop',
     description: 'Iterate inside explicit bounds and keep every decision traceable for later inspection.',
-    status: 'Exploring',
+    status: 'Planned',
     flow: 'Metric -> Iterate',
   },
 ]
@@ -533,13 +501,14 @@ export default function App() {
   useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash
-      setActiveArticle(hash.startsWith('#/docs/') ? hash.slice('#/docs/'.length) : null)
-      setActiveCase(hash.startsWith('#/cases/') ? hash.slice('#/cases/'.length) : null)
-      if (hash.startsWith('#/docs')) setActivePanel('docs')
-      else if (hash.startsWith('#/cases/')) setActivePanel('cases')
-      else {
-        const id = hash.slice(1) as PanelId
-        setActivePanel(panelIds.includes(id) ? id : 'hero')
+      const requested = hash === '#/docs' || hash.startsWith('#/docs/') ? 'docs'
+        : hash.startsWith('#/cases/') ? 'cases' : hash.slice(1) as PanelId
+      const panel = visiblePanelIds.includes(requested) ? requested : 'hero'
+      setActivePanel(panel)
+      setActiveArticle(panel === 'docs' && hash.startsWith('#/docs/') ? hash.slice('#/docs/'.length) : null)
+      setActiveCase(panel === 'cases' && hash.startsWith('#/cases/') ? hash.slice('#/cases/'.length) : null)
+      if (panelIds.includes(requested) && !isPanelEnabled(requested)) {
+        window.history.replaceState(null, '', '#hero')
       }
     }
 
@@ -550,7 +519,7 @@ export default function App() {
 
   useEffect(() => {
     const docsPanel = panelRefs.current.docs
-    if (!activeArticle || !docsPanel) return
+    if (!isPanelEnabled('docs') || !activeArticle || !docsPanel) return
 
     setActivePanel('docs')
     docsPanel.scrollTo({ top: 0, behavior: 'smooth' })
@@ -579,8 +548,9 @@ export default function App() {
   const article = activeArticle ? articles.find((item) => item.slug === activeArticle) : undefined
 
   const scrollToPanel = (id: PanelId) => {
-    setActivePanel(id)
-    window.location.hash = id
+    const target = isPanelEnabled(id) ? id : 'hero'
+    setActivePanel(target)
+    window.location.hash = target
   }
 
   return (
@@ -593,7 +563,7 @@ export default function App() {
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">
-          {panelIds.slice(1).map((id) => (
+          {visiblePanelIds.filter((id) => id !== 'hero').map((id) => (
             <button
               key={id}
               className={activePanel === id ? 'active' : ''}
@@ -635,8 +605,8 @@ export default function App() {
                     <button className="button button-primary" onClick={() => scrollToPanel('skills')}>
                       Explore Skills <span>→</span>
                     </button>
-                    <button className="button button-quiet" onClick={() => scrollToPanel('docs')}>
-                      Read Technical Notes <span>→</span>
+                    <button className="button button-quiet" onClick={() => scrollToPanel(isPanelEnabled('docs') ? 'docs' : 'cases')}>
+                      {isPanelEnabled('docs') ? 'Read Technical Notes' : 'Explore Case Studies'} <span>→</span>
                     </button>
                   </div>
                   <div className="hero-meta">
@@ -686,7 +656,7 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="section-note">
-                  A working map of the skills behind reproducible antenna and microwave research.
+                  已发布的真实项目与可复用工具，按实际进展持续更新。
                 </p>
               </div>
 
@@ -738,24 +708,24 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="section-note">
-                  Small, inspectable tool connections that let an agent act inside a real electromagnetic workflow.
+                  连接 AI Agent 与工程软件。置顶项目可直接访问，其余研究方向明确标注为规划中。
                 </p>
               </div>
 
               <div className="card-grid mcp-grid">
                 {mcps.map((mcp, index) => (
-                  <article className="mcp-card" key={mcp.name}>
+                  <article className={`mcp-card ${mcp.featured ? 'mcp-card-featured' : ''}`} key={mcp.name}>
                     <div className="mcp-number">0{index + 1}</div>
                     <div>
                       <div className="card-top">
-                        <span className={`status-pill status-${mcp.status.toLowerCase()}`}>{mcp.status}</span>
+                        <span className={`status-pill status-${mcp.status.toLowerCase().replace(/\s+/g, '-')}`}>{mcp.status}</span>
                         <span className="flow-label">{mcp.flow}</span>
                       </div>
+                      {mcp.featured && <span className="mcp-pinned">PINNED / 置顶项目</span>}
                       <h3>{mcp.name}</h3>
                       <p>{mcp.description}</p>
-                      <a href="https://github.com" target="_blank" rel="noreferrer">
-                        View interface <span>→</span>
-                      </a>
+                      {mcp.href ? <a href={mcp.href} target="_blank" rel="noreferrer">View GitHub project <span>↗</span></a>
+                        : <span className="mcp-planned-note">规划中 · 项目入口待补充</span>}
                     </div>
                   </article>
                 ))}
@@ -792,7 +762,7 @@ export default function App() {
             </div>
           </section>
 
-          <section
+          {isPanelEnabled('paper2hfss') && <section
             id="paper2hfss"
             ref={(node) => {
               panelRefs.current.paper2hfss = node
@@ -836,13 +806,13 @@ export default function App() {
                 <div><p className="eyebrow">FEATURED CASE / AI 辅助研究实践</p><strong>二维码网格贴片天线 · 跨三种求解器的论文复现</strong><p>共同的几何与材料，三种数值方法。探索真实结构、S11 曲线与误差分析。</p></div><span>↗</span>
               </a>
             </div>
-          </section>
+          </section>}
 
           <section id="cases" ref={(node) => { panelRefs.current.cases = node }} className={`panel ${activePanel === 'cases' ? 'panel-active' : ''}`}>
             {activePanel === 'cases' && <Suspense fallback={<div className="panel-inner"><p className="eyebrow">Loading case studies…</p></div>}><CaseStudies selected={activeCase} /></Suspense>}
           </section>
 
-          <section
+          {isPanelEnabled('docs') && <section
             id="docs"
             ref={(node) => {
               panelRefs.current.docs = node
@@ -954,7 +924,7 @@ export default function App() {
                 </div>
               </footer>
             </div>
-          </section>
+          </section>}
         </div>
       </main>
     </div>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import data from '../data/qr-grid-patch.json'
+import { isPanelEnabled } from '../site-config'
 
 type CurveId = keyof typeof data.curves
 type SolverId = keyof typeof data.metrics
@@ -299,6 +300,6 @@ export default function CaseStudies({ selected }: { selected: string | null }) {
       ['FEKO 2026.0', 'QR_Patch_MoM_EdgePort_20260728_v3.cfx / .fek', 'MoM / SEP · 最终导出 S11'],
       ['课程论文 / Lavax', 'FDTD、MoM、FEM 二维码网格贴片天线课程论文', '方法、评价规则和结果分析依据'],
     ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页不提供下载。AI 辅助复现属于研究实践，当前页面未声明 Paper2HFSS 已具备全流程自动化能力。</p></section>
-    <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div><a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a></footer>
+    <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">返回案例广场 →</a>}</footer>
   </div>
 }
