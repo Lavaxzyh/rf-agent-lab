@@ -583,7 +583,7 @@ export default function App() {
           ))}
         </nav>
 
-        <a className="nav-github" href="https://github.com/Lavaxzyh/paper2hfss" target="_blank" rel="noreferrer">
+        <a className="nav-github" href="https://github.com/Lavaxzyh" target="_blank" rel="noreferrer">
           GitHub →
         </a>
       </header>

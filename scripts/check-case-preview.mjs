@@ -11,6 +11,7 @@ const errors = []
 page.on('pageerror', (error) => errors.push(error.message))
 try {
   await page.goto(`${url}/#hero`)
+  assert.equal(await page.locator('.nav-github').getAttribute('href'), 'https://github.com/Lavaxzyh')
   await page.getByRole('button', { name: 'Go to skills', exact: true }).click()
   assert.equal(await page.locator('#skills .skill-card').count(), 1)
   assert.equal(await page.locator('#skills .skill-card h3').innerText(), 'Codex Profile Switch')
