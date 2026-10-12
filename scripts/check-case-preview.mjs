@@ -19,7 +19,8 @@ try {
   assert.equal(await page.locator('#mcp .mcp-card h3').first().innerText(), 'ads-mcp')
   assert.equal(await page.locator('#mcp .mcp-card a').first().getAttribute('href'), 'https://github.com/Lavaxzyh/ads-mcp')
   assert.equal(await page.locator('#mcp .mcp-card-featured').count(), 1)
-  assert.equal(await page.locator('#mcp .mcp-planned-note').count(), 6)
+  assert.equal(await page.locator('#mcp .mcp-card').count(), 1)
+  assert.equal(await page.locator('#mcp .mcp-planned-note').count(), 0)
   await page.screenshot({ path: '.local-preview/mcp-pinned-project.png' })
   const docsEnabled = await page.getByRole('button', { name: 'Go to docs', exact: true }).count() > 0
   const paperEnabled = await page.getByRole('button', { name: 'Go to paper2hfss', exact: true }).count() > 0
@@ -35,6 +36,8 @@ try {
   }
   await page.getByRole('button', { name: 'Go to cases', exact: true }).click()
   await page.locator('.case-feature').waitFor()
+  assert.equal(await page.locator('#cases .eyebrow').innerText(), '04 / CASE STUDIES')
+  assert.equal((await page.getByRole('button', { name: 'Go to cases', exact: true }).textContent()).trim(), 'Case Studies')
   await page.screenshot({ path: '.local-preview/cases-desktop.png' })
   await page.locator('.case-feature').click()
   await page.locator('.case-source').waitFor()
@@ -70,7 +73,7 @@ try {
   assert.equal(await page.locator('tbody .minimum-status.boundary').count(), 0)
   await page.reload()
   await page.locator('.case-source').waitFor()
-  await page.getByRole('link', { name: '← 返回案例广场' }).click()
+  await page.getByRole('link', { name: '← Back to Case Studies' }).click()
   await page.locator('.case-feature').waitFor()
   await page.goBack()
   await page.locator('.case-source').waitFor()

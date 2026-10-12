@@ -7,7 +7,7 @@
 
 在仓库目录执行 `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort`。
 
-- 案例广场：`http://127.0.0.1:4173/#cases`
+- Case Studies（04）：`http://127.0.0.1:4173/#cases`
 - 完整案例：`http://127.0.0.1:4173/#/cases/qr-grid-patch`
 - 构建检查：`npm run build`
 
@@ -17,7 +17,9 @@
 目前 `paper2hfss` 与 `docs` 为 `false`，原页面源码和 Markdown 文件保留。
 访问已隐藏栏目旧地址会回到首页，首页和案例页不再链接到这些栏目。
 后续将对应值改成 `true` 并重新构建即可恢复显示。
-Skills 仅展示 Codex Profile Switch；MCP 置顶真实 ads-mcp 项目，其他条目标明规划中。
+Skills 仅展示 Codex Profile Switch；MCP 仅展示置顶的真实 ads-mcp 项目。
+其他 MCP 条目保留 `Planned` 状态，`published: false` 隐藏，不出现在页面中。
+后续在 `src/App.tsx` 的 MCP 数据中将对应 `published` 改为 `true` 即可展示。
 
 ## 内容来源
 

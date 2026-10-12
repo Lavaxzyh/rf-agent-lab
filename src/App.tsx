@@ -32,6 +32,7 @@ type MCPItem = {
   flow: string
   href?: string
   featured?: boolean
+  published: boolean
 }
 
 type WorkflowStep = {
@@ -383,39 +384,46 @@ const mcps: MCPItem[] = [
     flow: 'Schematic → Simulation → S-parameters',
     href: 'https://github.com/Lavaxzyh/ads-mcp',
     featured: true,
+    published: true,
   },
   {
     name: 'AEDT / HFSS MCP',
+    published: false,
     description: 'Expose local HFSS control as a reviewable engineering tool instead of a black box action.',
     status: 'Planned',
     flow: 'Paper -> HFSS',
   },
   {
     name: 'PyAEDT Automation',
+    published: false,
     description: 'Parameterize geometry, ports and setup definitions for minimal-repeatability experiments.',
     status: 'Planned',
     flow: 'Script -> Model',
   },
   {
     name: 'Paper Parsing Agent',
+    published: false,
     description: 'Extract geometry, material and simulation clues from PDF pages, figures and tables.',
     status: 'Planned',
     flow: 'Paper -> Params',
   },
   {
     name: 'Simulation Verification',
+    published: false,
     description: 'Compare simulated curves and metrics with paper evidence before claiming a match.',
     status: 'Planned',
     flow: 'Run -> Evidence',
   },
   {
     name: 'Result Extraction',
+    published: false,
     description: 'Convert S-parameters, gain, efficiency and plots into structured data for review.',
     status: 'Planned',
     flow: 'HFSS -> Report',
   },
   {
     name: 'Optimization Loop',
+    published: false,
     description: 'Iterate inside explicit bounds and keep every decision traceable for later inspection.',
     status: 'Planned',
     flow: 'Metric -> Iterate',
@@ -570,7 +578,7 @@ export default function App() {
               onClick={() => scrollToPanel(id)}
               aria-label={`Go to ${id}`}
             >
-              {id === 'paper2hfss' ? 'Paper2HFSS' : id === 'demos' ? 'Visual Lab' : id === 'cases' ? '案例广场' : id}
+              {id === 'paper2hfss' ? 'Paper2HFSS' : id === 'demos' ? 'Visual Lab' : id === 'cases' ? 'Case Studies' : id}
             </button>
           ))}
         </nav>
@@ -708,12 +716,12 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="section-note">
-                  连接 AI Agent 与工程软件。置顶项目可直接访问，其余研究方向明确标注为规划中。
+                  连接 AI Agent 与工程软件。这里展示已公开的工程工具，可直接访问项目源码与使用说明。
                 </p>
               </div>
 
               <div className="card-grid mcp-grid">
-                {mcps.map((mcp, index) => (
+                {mcps.filter((mcp) => mcp.published).map((mcp, index) => (
                   <article className={`mcp-card ${mcp.featured ? 'mcp-card-featured' : ''}`} key={mcp.name}>
                     <div className="mcp-number">0{index + 1}</div>
                     <div>

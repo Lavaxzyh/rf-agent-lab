@@ -272,15 +272,15 @@ function SolverComparison() {
 export default function CaseStudies({ selected }: { selected: string | null }) {
   const detail = selected === slug
   const goTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
-  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = detail ? '二维码网格贴片天线复现 · Lavax | Paper2HFSS' : '案例广场 · Paper2HFSS'; return () => { document.title = 'Paper2HFSS · Lavax' } }, [detail])
-  if (selected && !detail) return <div className="panel-inner case-page"><h1>未找到这个案例</h1><a className="back-link" href="#cases">← 返回案例广场</a></div>
+  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = detail ? '二维码网格贴片天线复现 · Lavax | Paper2HFSS' : 'Case Studies · Paper2HFSS'; return () => { document.title = 'Paper2HFSS · Lavax' } }, [detail])
+  if (selected && !detail) return <div className="panel-inner case-page"><h1>未找到这个案例</h1><a className="back-link" href="#cases">← Back to Case Studies</a></div>
   if (!detail) return <div className="panel-inner case-page">
-    <div className="case-list-heading"><div><p className="eyebrow">05 / CASE STUDIES</p><h2>让复现过程<br /><em>有据可查。</em></h2></div><p>从工程参数到曲线比较，记录真实研究中的方法、结果与偏差。<span>Research by Lavax / AI-assisted engineering</span></p></div>
+    <div className="case-list-heading"><div><p className="eyebrow">04 / CASE STUDIES</p><h2>让复现过程<br /><em>有据可查。</em></h2></div><p>从工程参数到曲线比较，记录真实研究中的方法、结果与偏差。<span>Research by Lavax / AI-assisted engineering</span></p></div>
     <a className="case-feature" href={`#/cases/${slug}`}><div className="case-cover"><PixelArt /><span className="cover-number">CASE / 001</span><span className="cover-label">MULTIBAND PATCH ANTENNA</span></div><div className="case-feature-copy"><div className="case-badges"><span>论文复现</span><span>AI 辅助</span><span>2026</span></div><h3>二维码网格贴片天线<br /><em>跨三种求解器的论文复现</em></h3><p>统一几何与材料，在 HFSS、CST 与 FEKO 中复现多频贴片结构，并与原论文实测曲线进行比较。</p><div className="feature-stats"><div><strong>3</strong><span>full-wave solvers</span></div><div><strong>2–7.5 <small>GHz</small></strong><span>comparison range</span></div><div><strong>72</strong><span>metallic pixels</span></div></div><span className="case-read">探索完整案例 <span>↗</span></span></div></a>
     <p className="case-list-foot">01 RESEARCH CASE <span>以工程证据记录研究，而让结果持续接受检验。</span></p>
   </div>
   return <div className="panel-inner case-page case-detail">
-    <a className="back-link" href="#cases">← 返回案例广场</a>
+    <a className="back-link" href="#cases">← Back to Case Studies</a>
     <header className="case-hero"><div><p className="eyebrow">CASE / 001 · AI-ASSISTED REPRODUCTION</p><h1>二维码网格贴片天线<span>跨三种求解器的<em>论文复现。</em></span></h1><p className="case-lede">同一份论文，同一个终态结构。用三种全波数值方法，核对模型与结果之间的距离。</p><div className="case-badges"><span>Lavax · 复现与分析</span><span>工程归档 2026-08-04</span><span>HFSS / CST / FEKO</span></div></div><div className="case-hero-art"><PixelArt compact /></div></header>
     <SourceBlock />
     <div className="case-overview-metrics"><div><span>COMPARISON RANGE</span><strong>2–7.5 <small>GHz</small></strong></div><div><span>HFSS FULL-BAND RMSE</span><strong>2.59 <small>dB</small></strong></div><div><span>HFSS RESONANCE MAE</span><strong>{oneDecimal(data.metrics.hfss.frequencyMAE)} <small>MHz</small></strong></div><div><span>SHARED GEOMETRY</span><strong>72 <small>pixels / 16 bridges</small></strong></div></div>
@@ -300,6 +300,6 @@ export default function CaseStudies({ selected }: { selected: string | null }) {
       ['FEKO 2026.0', 'QR_Patch_MoM_EdgePort_20260728_v3.cfx / .fek', 'MoM / SEP · 最终导出 S11'],
       ['课程论文 / Lavax', 'FDTD、MoM、FEM 二维码网格贴片天线课程论文', '方法、评价规则和结果分析依据'],
     ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页不提供下载。AI 辅助复现属于研究实践，当前页面未声明 Paper2HFSS 已具备全流程自动化能力。</p></section>
-    <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">返回案例广场 →</a>}</footer>
+    <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">Back to Case Studies →</a>}</footer>
   </div>
 }
