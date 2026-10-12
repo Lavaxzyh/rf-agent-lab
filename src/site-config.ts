@@ -1,3 +1,8 @@
+export const siteIdentity = {
+  name: 'RF Agent Lab',
+  title: 'RF Agent Lab · Lavax',
+}
+
 // Publication switches: preserve unfinished sections in source.
 // Enable a section here and rebuild once its content is ready.
 export const panelVisibility = {

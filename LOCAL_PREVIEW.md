@@ -1,5 +1,8 @@
 # 本地案例预览
 
+网站暂定品牌：RF Agent Lab，署名 Lavax。首页定位为 AI × RF 工程工具与研究实践。
+原 Paper2HFSS 预告模块保留，当前隐藏；仓库名、部署路径及旧路由未变更。
+
 本地分支：`codex/case-studies`。修改前基准：`8adc048`（原 `main`）。
 本次只在本地开发，没有推送或触发 GitHub Pages 发布。
 

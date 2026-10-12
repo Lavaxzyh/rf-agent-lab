@@ -1067,7 +1067,7 @@ h2 em {
   }
 
   .hero-copy h1 {
-    font-size: clamp(40px, 15vw, 64px);
+    font-size: clamp(30px, 10.5vw, 64px);
   }
 
   .hero-lede {
@@ -1082,6 +1082,7 @@ h2 em {
 
   .hero-visual {
     min-height: 285px;
+    overflow: clip;
   }
 
   .visual-label {

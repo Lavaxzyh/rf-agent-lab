@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './cases/cases.css'
-import { isPanelEnabled, type PanelId } from './site-config'
+import { isPanelEnabled, siteIdentity, type PanelId } from './site-config'
 const CaseStudies = lazy(() => import('./cases/CaseStudies'))
 
 type Article = {
@@ -564,9 +564,9 @@ export default function App() {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <a className="brand" href="#hero" aria-label="Paper2HFSS home" onClick={() => scrollToPanel('hero')}>
+        <a className="brand" href="#hero" aria-label={`${siteIdentity.name} home`} onClick={() => scrollToPanel('hero')}>
           <span className="brand-mark">⌬</span>
-          <span>Paper2HFSS</span>
+          <span>{siteIdentity.name}</span>
           <small>by Lavax</small>
         </a>
 
@@ -602,12 +602,12 @@ export default function App() {
                 <div className="hero-copy">
                   <p className="eyebrow">AI × RF × ANTENNA ENGINEERING</p>
                   <h1>
-                    From Paper to<br />
-                    <em>Verified HFSS Model.</em>
+                    Connecting AI to<br />
+                    <em>RF Engineering.</em>
                   </h1>
                   <p className="hero-lede">
-                    A research-focused workflow for turning papers into reproducible HFSS models, local
-                    simulations and verifiable results.
+                    Tools, agents and reproducible research for RF, microwave and antenna engineering.
+                    Explore open-source workflows, interactive experiments and traceable results.
                   </p>
                   <div className="hero-actions">
                     <button className="button button-primary" onClick={() => scrollToPanel('skills')}>
@@ -629,8 +629,8 @@ export default function App() {
                   <div className="field-orbit orbit-two" />
                   <div className="field-orbit orbit-three" />
                   <div className="field-core">
-                    <span>HFSS</span>
-                    <small>LOCAL SOLVE</small>
+                    <span>AI × RF</span>
+                    <small>ENGINEERING LAB</small>
                   </div>
                   <span className="visual-label label-top">S11 / S21 / f0</span>
                   <span className="visual-label label-bottom">PARAMETRIC · TRACEABLE · ITERATIVE</span>
@@ -716,7 +716,7 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="section-note">
-                  连接 AI Agent 与工程软件。这里展示已公开的工程工具，可直接访问项目源码与使用说明。
+                  连接 AI Agent 与工程软件。这里展示已公开的MCP Server，可直接访问项目源码与使用说明。
                 </p>
               </div>
 
@@ -920,7 +920,7 @@ export default function App() {
                 <div>
                   <a className="brand" href="#hero" onClick={() => scrollToPanel('hero')}>
                     <span className="brand-mark">⌬</span>
-                    <span>Paper2HFSS</span>
+                    <span>{siteIdentity.name}</span>
                   </a>
                   <p>© 2026 Lavax · Technical notes and project materials for research and education.</p>
                 </div>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import data from '../data/qr-grid-patch.json'
-import { isPanelEnabled } from '../site-config'
+import { isPanelEnabled, siteIdentity } from '../site-config'
 
 type CurveId = keyof typeof data.curves
 type SolverId = keyof typeof data.metrics
@@ -272,7 +272,7 @@ function SolverComparison() {
 export default function CaseStudies({ selected }: { selected: string | null }) {
   const detail = selected === slug
   const goTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
-  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = detail ? '二维码网格贴片天线复现 · Lavax | Paper2HFSS' : 'Case Studies · Paper2HFSS'; return () => { document.title = 'Paper2HFSS · Lavax' } }, [detail])
+  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = detail ? `二维码网格贴片天线复现 · Lavax | ${siteIdentity.name}` : `Case Studies · ${siteIdentity.name}`; return () => { document.title = siteIdentity.title } }, [detail])
   if (selected && !detail) return <div className="panel-inner case-page"><h1>未找到这个案例</h1><a className="back-link" href="#cases">← Back to Case Studies</a></div>
   if (!detail) return <div className="panel-inner case-page">
     <div className="case-list-heading"><div><p className="eyebrow">04 / CASE STUDIES</p><h2>让复现过程<br /><em>有据可查。</em></h2></div><p>从工程参数到曲线比较，记录真实研究中的方法、结果与偏差。<span>Research by Lavax / AI-assisted engineering</span></p></div>
@@ -299,7 +299,7 @@ export default function CaseStudies({ selected }: { selected: string | null }) {
       ['CST 2026.1', 'QR_Patch_CST_TD_WaveguidePort_20260728_v1.cst', 'FIT 时域 · 最终导出 S11'],
       ['FEKO 2026.0', 'QR_Patch_MoM_EdgePort_20260728_v3.cfx / .fek', 'MoM / SEP · 最终导出 S11'],
       ['课程论文 / Lavax', 'FDTD、MoM、FEM 二维码网格贴片天线课程论文', '方法、评价规则和结果分析依据'],
-    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页不提供下载。AI 辅助复现属于研究实践，当前页面未声明 Paper2HFSS 已具备全流程自动化能力。</p></section>
+    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页不提供下载。AI 辅助复现属于研究实践，当前页面未声明 {siteIdentity.name} 已具备全流程自动化能力。</p></section>
     <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">Back to Case Studies →</a>}</footer>
   </div>
 }

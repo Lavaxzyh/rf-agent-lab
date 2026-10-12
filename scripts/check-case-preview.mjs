@@ -11,6 +11,17 @@ const errors = []
 page.on('pageerror', (error) => errors.push(error.message))
 try {
   await page.goto(`${url}/#hero`)
+  assert.equal(await page.title(), 'RF Agent Lab · Lavax')
+  assert.equal(await page.locator('.topbar .brand > span').last().innerText(), 'RF Agent Lab')
+  assert.equal(await page.locator('#hero h1 em').innerText(), 'RF Engineering.')
+  for (const width of [1440, 834, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 })
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Hero document overflow at ${width}`)
+    assert(await page.locator('#hero').evaluate((el) => el.scrollWidth <= el.clientWidth), `Hero panel overflow at ${width}`)
+    assert(await page.locator('.topbar').evaluate((el) => el.scrollWidth <= el.clientWidth), `Top navigation overflow at ${width}`)
+    await page.screenshot({ path: `.local-preview/rf-agent-lab-${width}.png` })
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 })
   assert.equal(await page.locator('.nav-github').getAttribute('href'), 'https://github.com/Lavaxzyh')
   await page.getByRole('button', { name: 'Go to skills', exact: true }).click()
   assert.equal(await page.locator('#skills .skill-card').count(), 1)
@@ -37,11 +48,13 @@ try {
   }
   await page.getByRole('button', { name: 'Go to cases', exact: true }).click()
   await page.locator('.case-feature').waitFor()
+  assert.equal(await page.title(), 'Case Studies · RF Agent Lab')
   assert.equal(await page.locator('#cases .eyebrow').innerText(), '04 / CASE STUDIES')
   assert.equal((await page.getByRole('button', { name: 'Go to cases', exact: true }).textContent()).trim(), 'Case Studies')
   await page.screenshot({ path: '.local-preview/cases-desktop.png' })
   await page.locator('.case-feature').click()
   await page.locator('.case-source').waitFor()
+  assert.equal(await page.title(), '二维码网格贴片天线复现 · Lavax | RF Agent Lab')
   assert.match(await page.locator('.case-source').innerText(), /10\.1109\/TAP\.2025\.3623329/)
   assert.equal(await page.getByRole('link', { name: 'IEEE Xplore 原文 ↗' }).getAttribute('href'), 'https://ieeexplore.ieee.org/document/11217334')
   await page.screenshot({ path: '.local-preview/case-detail-desktop.png' })

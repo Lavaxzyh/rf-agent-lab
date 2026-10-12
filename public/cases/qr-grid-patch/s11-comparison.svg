@@ -10,7 +10,7 @@
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Lavax / Paper2HFSS</dc:title>
+      <dc:title>Lavax / RF Agent Lab</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -2369,7 +2369,7 @@ L 264.36375 360.739969
    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #8ea7aa" x="73.44" y="433.152" transform="rotate(-0 73.44 433.152)">Reference: Ma et al., IEEE TAP 74(1), 38-50 (2026). DOI: 10.1109/TAP.2025.3623329</text>
   </g>
   <g id="text_24">
-   <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #8ea7aa" x="73.44" y="446.0544" transform="rotate(-0 73.44 446.0544)">Paper curves digitized from Fig. 16; simulations from archived exports. Redrawn by Lavax / Paper2HFSS.</text>
+   <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #8ea7aa" x="73.44" y="446.0544" transform="rotate(-0 73.44 446.0544)">Paper curves digitized from Fig. 16; simulations from archived exports. Redrawn by Lavax / RF Agent Lab.</text>
   </g>
  </g>
  <defs>

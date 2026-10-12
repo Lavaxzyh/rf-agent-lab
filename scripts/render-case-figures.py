@@ -42,9 +42,9 @@ legend = ax.legend(loc='lower left', ncol=2, facecolor='#0b1b2a',
                    edgecolor='#36505e', labelcolor='#b9cccc', fontsize=9)
 fig.text(.085, .06, 'Reference: Ma et al., IEEE TAP 74(1), 38-50 (2026). DOI: 10.1109/TAP.2025.3623329',
          color='#8ea7aa', fontsize=8)
-fig.text(.085, .032, 'Paper curves digitized from Fig. 16; simulations from archived exports. Redrawn by Lavax / Paper2HFSS.',
+fig.text(.085, .032, 'Paper curves digitized from Fig. 16; simulations from archived exports. Redrawn by Lavax / RF Agent Lab.',
          color='#8ea7aa', fontsize=8)
 fig.subplots_adjust(left=.085, right=.975, top=.9, bottom=.16)
-fig.savefig(out / 's11-comparison.svg', metadata={'Creator': 'Lavax / Paper2HFSS'})
+fig.savefig(out / 's11-comparison.svg', metadata={'Creator': 'Lavax / RF Agent Lab'})
 plt.close(fig)
 print('Rendered public/cases/qr-grid-patch/s11-comparison.svg')
