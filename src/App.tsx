@@ -41,7 +41,7 @@ type WorkflowStep = {
   description: string
 }
 
-const panelIds: PanelId[] = ['hero', 'skills', 'mcp', 'demos', 'paper2hfss', 'cases', 'docs']
+const panelIds: PanelId[] = ['hero', 'mcp', 'cases', 'skills', 'demos', 'paper2hfss', 'docs']
 const visiblePanelIds = panelIds.filter(isPanelEnabled)
 
 type ArrayParameters = {
@@ -657,7 +657,7 @@ export default function App() {
             <div className="panel-inner">
               <div className="section-heading">
                 <div>
-                  <p className="eyebrow">01 / SKILLS GALLERY</p>
+                  <p className="eyebrow">03 / SKILLS GALLERY</p>
                   <h2>
                     Build the right<br />
                     <em>mental model.</em>
@@ -709,7 +709,7 @@ export default function App() {
             <div className="panel-inner">
               <div className="section-heading">
                 <div>
-                  <p className="eyebrow">02 / MCP GALLERY</p>
+                  <p className="eyebrow">01 / MCP GALLERY</p>
                   <h2>
                     Connect intelligence<br />
                     <em>to engineering.</em>
@@ -751,7 +751,7 @@ export default function App() {
             <div className="panel-inner demo-inner">
               <div className="section-heading demo-heading">
                 <div>
-                  <p className="eyebrow">03 / VISUAL INTERACTION LAB</p>
+                  <p className="eyebrow">04 / VISUAL INTERACTION LAB</p>
                   <h2>
                     See the field.<br />
                     <em>Shape the beam.</em>
@@ -780,7 +780,7 @@ export default function App() {
             <div className="panel-inner">
               <div className="product-header">
                 <div>
-                  <p className="eyebrow">04 / RESEARCH PREVIEW</p>
+                  <p className="eyebrow">05 / RESEARCH PREVIEW</p>
                   <h2>Paper2HFSS</h2>
                   <p className="product-tagline">
                     Not PDF to HFSS.

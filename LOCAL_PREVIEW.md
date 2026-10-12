@@ -10,11 +10,13 @@
 
 在仓库目录执行 `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort`。
 
-- Case Studies（04）：`http://127.0.0.1:4173/#cases`
+- Case Studies（02）：`http://127.0.0.1:4173/#cases`
 - 完整案例：`http://127.0.0.1:4173/#/cases/qr-grid-patch`
 - 构建检查：`npm run build`
 
 ## 栏目上线开关
+
+当前导航顺序：01 MCP → 02 Case Studies → 03 Skills → 04 Visual Lab。
 
 `src/site-config.ts` 的 `panelVisibility` 控制导航、路由和页面展示。
 目前 `paper2hfss` 与 `docs` 为 `false`，原页面源码和 Markdown 文件保留。
