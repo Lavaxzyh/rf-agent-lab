@@ -294,12 +294,12 @@ export default function CaseStudies({ selected }: { selected: string | null }) {
       ['03', '频率接近，深度仍可能不同', '6.49–6.95 GHz 内 HFSS 与 CST 的谷值较深。未建模的 SMA、理想 PEC 与网格处理均可能影响高 Q 谷值；本案例未进行几何调参。'],
       ['04', '参考数据也有读取误差', '论文曲线是从 Fig. 16 数字化的 1101 点。图像线宽、抗锯齿和分辨率带来读取误差；RMSE 衡量当前复现与图像参考之间的距离。'],
     ].map(([number, title, text]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
-    <section id="case-evidence" className="case-section"><div className="case-section-heading"><span className="case-kicker">05 / ENGINEERING EVIDENCE</span><h2>从图形，回到<em>可追溯的工程。</em></h2><p>本站根据已归档报告、工程参数和导出结果整理；本次网页制作未重新运行求解器。</p></div><div className="evidence-list">{[
+    <section id="case-evidence" className="case-section"><div className="case-section-heading"><span className="case-kicker">05 / ENGINEERING EVIDENCE</span><h2>从图形，回到<em>可追溯的工程。</em></h2></div><div className="evidence-list">{[
       ['HFSS / AEDT 2026 R1', 'QR_Patch_FEM_ModalRegion_20260728_v1.aedt', 'Modal Network · 最终导出 S11 与统计记录'],
       ['CST 2026.1', 'QR_Patch_CST_TD_WaveguidePort_20260728_v1.cst', 'FIT 时域 · 最终导出 S11'],
       ['FEKO 2026.0', 'QR_Patch_MoM_EdgePort_20260728_v3.cfx / .fek', 'MoM / SEP · 最终导出 S11'],
       ['课程论文 / Lavax', 'FDTD、MoM、FEM 二维码网格贴片天线课程论文', '方法、评价规则和结果分析依据'],
-    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页不提供下载。AI 辅助复现属于研究实践，当前页面未声明 {siteIdentity.name} 已具备全流程自动化能力。</p></section>
+    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页暂不提供下载。AI 辅助复现属于研究实践，当前页面未声明 {siteIdentity.name} 已具备全流程自动化能力。</p></section>
     <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">Back to Case Studies →</a>}</footer>
   </div>
 }

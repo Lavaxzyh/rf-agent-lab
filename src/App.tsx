@@ -925,7 +925,7 @@ export default function App() {
                   <p>© 2026 Lavax · Technical notes and project materials for research and education.</p>
                 </div>
                 <div className="footer-links">
-                  <a href="https://github.com/Lavaxzyh/paper2hfss" target="_blank" rel="noreferrer">
+                  <a href="https://github.com/Lavaxzyh/rf-agent-lab" target="_blank" rel="noreferrer">
                     GitHub →
                   </a>
                   <a href="mailto:hello@paper2hfss.dev">Email →</a>

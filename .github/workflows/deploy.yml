@@ -1,4 +1,4 @@
-name: Deploy Paper2HFSS to GitHub Pages
+name: Deploy RF Agent Lab to GitHub Pages
 
 on:
   push:
