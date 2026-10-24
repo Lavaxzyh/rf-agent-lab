@@ -1,0 +1,3 @@
+# Native engineering projects and downloadable archives must stay byte-identical.
+*.aedt -text
+*.zip -text
