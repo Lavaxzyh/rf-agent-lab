@@ -4,6 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './cases/cases.css'
 import { isPanelEnabled, siteIdentity, type PanelId } from './site-config'
 const CaseStudies = lazy(() => import('./cases/CaseStudies'))
+const DocsPage = lazy(() => import('./docs/DocsPage'))
+// Retain the original demo-blog implementation without publishing its examples.
+const legacyDocsEnabled = false
 
 type Article = {
   slug: string
@@ -654,19 +657,8 @@ export default function App() {
             }}
             className={`panel ${activePanel === 'skills' ? 'panel-active' : ''}`}
           >
-            <div className="panel-inner">
-              <div className="section-heading">
-                <div>
-                  <p className="eyebrow">03 / SKILLS GALLERY</p>
-                  <h2>
-                    Build the right<br />
-                    <em>mental model.</em>
-                  </h2>
-                </div>
-                <p className="section-note">
-                  已发布的真实项目与可复用工具，按实际进展持续更新。
-                </p>
-              </div>
+            <div className="panel-inner panel-content-only">
+              <h1 className="visually-hidden">Skills</h1>
 
               <div className="card-grid skills-grid">
                 {skills.map((skill, index) => {
@@ -706,19 +698,8 @@ export default function App() {
             }}
             className={`panel panel-tinted ${activePanel === 'mcp' ? 'panel-active' : ''}`}
           >
-            <div className="panel-inner">
-              <div className="section-heading">
-                <div>
-                  <p className="eyebrow">01 / MCP GALLERY</p>
-                  <h2>
-                    Connect intelligence<br />
-                    <em>to engineering.</em>
-                  </h2>
-                </div>
-                <p className="section-note">
-                  连接 AI Agent 与工程软件。这里展示已公开的MCP Server，可直接访问项目源码与使用说明。
-                </p>
-              </div>
+            <div className="panel-inner panel-content-only">
+              <h1 className="visually-hidden">MCP</h1>
 
               <div className="card-grid mcp-grid">
                 {mcps.filter((mcp) => mcp.published).map((mcp, index) => (
@@ -748,24 +729,12 @@ export default function App() {
             }}
             className={`panel demo-panel ${activePanel === 'demos' ? 'panel-active' : ''}`}
           >
-            <div className="panel-inner demo-inner">
-              <div className="section-heading demo-heading">
-                <div>
-                  <p className="eyebrow">04 / VISUAL INTERACTION LAB</p>
-                  <h2>
-                    See the field.<br />
-                    <em>Shape the beam.</em>
-                  </h2>
-                </div>
-                <div className="demo-directory">
-                  <span>DEMO INDEX</span>
-                  <button type="button" className="active" aria-current="page">01 · Planar Array Factor</button>
-                  <span className="demo-coming">MORE MODULES · SOON</span>
-                </div>
+            <div className="panel-inner demo-inner panel-content-only">
+              <h1 className="visually-hidden">Visual Lab</h1>
+              <div className="demo-directory">
+                <span>DEMO INDEX</span>
+                <button type="button" className="active" aria-current="page">01 · Planar Array Factor</button>
               </div>
-              <p className="demo-intro">
-                A small browser-side experiment for connecting array parameters with a visible radiation-pattern response.
-              </p>
               <ArrayPatternDemo />
             </div>
           </section>
@@ -827,7 +796,9 @@ export default function App() {
             }}
             className={`panel panel-tinted ${activePanel === 'docs' ? 'panel-active' : ''}`}
           >
-            <div className="panel-inner docs-inner">
+            <div className={`panel-inner docs-inner ${activeArticle ? '' : 'panel-content-only'}`}>
+              {activePanel === 'docs' && <Suspense fallback={<p className="eyebrow">Loading technical docs…</p>}><DocsPage selected={activeArticle} /></Suspense>}
+              {legacyDocsEnabled && <>
               <div className="section-heading">
                 <div>
                   <p className="eyebrow">06 / TECHNICAL NOTES</p>
@@ -931,6 +902,7 @@ export default function App() {
                   <a href="mailto:hello@paper2hfss.dev">Email →</a>
                 </div>
               </footer>
+              </>}
             </div>
           </section>}
         </div>

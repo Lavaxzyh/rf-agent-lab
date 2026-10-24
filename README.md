@@ -7,11 +7,12 @@ AI × RF × Antenna Engineering — open-source tools, AI agents, interactive ex
 ## Explore
 
 1. MCP — published engineering MCP servers, starting with [ads-mcp](https://github.com/Lavaxzyh/ads-mcp).
-2. Case Studies — source-attributed antenna reproduction with interactive geometry and cross-solver comparisons.
+2. Case Studies — source-attributed antenna reproduction, plus a baseline branch-line coupler model with an editable HFSS project download.
 3. Skills — [Codex Profile Switch](https://github.com/Lavaxzyh/codex-profile-switch).
 4. Visual Lab — interactive antenna array-factor exploration.
+5. Docs — the PyAEDT postprocessing manual, API snapshots and offline validation records.
 
-The Paper2HFSS preview and technical notes remain in source but are hidden until ready for publication. Site visibility is controlled in `src/site-config.ts`; planned MCP entries stay unpublished.
+The Paper2HFSS preview and legacy demonstration articles remain in source but are hidden. Docs currently displays only the `docs/pyaedt-postprocessing` collection. Site visibility is controlled in `src/site-config.ts`; planned MCP entries stay unpublished.
 
 ## Local development
 
@@ -25,6 +26,6 @@ Push to `main` to build and deploy through GitHub Actions. Pages uses the GitHub
 
 ## Research attribution
 
-Case pages cite the original publication and distinguish its contributions from Lavax's AI-assisted reproduction. Only website assets, parameters and visualization data are published; original papers and simulation project files are not included for download.
+Case pages cite the original publication and distinguish its contributions from Lavax's AI-assisted reproduction. QR-grid antenna downloads offer the final HFSS/FEM v1, CST/FIT v1 and FEKO/MoM v3 core projects; the coupler download offers only baseline. External results/cache directories, original papers and course reports are not distributed. Each QR download includes source attribution, software-release information and native-file hashes in its README.
 
 See [LICENSE](LICENSE) for reuse terms and [LOCAL_PREVIEW.md](LOCAL_PREVIEW.md) for local verification and rollback notes.

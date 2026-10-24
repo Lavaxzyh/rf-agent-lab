@@ -12,6 +12,8 @@
     "@vitejs/plugin-react": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "three": "^0.185.1",
     "typescript": "latest",
     "vite": "latest"

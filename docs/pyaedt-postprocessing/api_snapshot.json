@@ -1,0 +1,631 @@
+{
+  "generated_at_utc": "2026-10-13T04:37:44.220022+00:00",
+  "pyaedt_version": "1.9.0",
+  "python_version": "3.10.11",
+  "python_executable": "[local environment path omitted]",
+  "package_entry": "[local environment path omitted]",
+  "members": [
+    {
+      "name": "Hfss.export_touchstone",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 413,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, setup: str | None = None, sweep: str | None = None, output_file: str | None = None, variations: list | None = None, variations_value: list | None = None, renormalization: bool = False, impedance: float | None = None, gamma_impedance_comments: bool = False) -> str | bool",
+      "docstring": "Export a Touchstone file.\n\nParameters\n----------\nsetup : str, optional\n    Name of the setup that has been solved.\nsweep : str, optional\n    Name of the sweep that has been solved.\noutput_file : str, optional\n    Full path and name for the Touchstone file.\n    The default is ``None``, in which case the Touchstone file is exported to\n    the working directory.\nvariations : list, optional\n    List of all parameter variations. For example, ``[\"$AmbientTemp\", \"$PowerIn\"]``.\n    The default is ``None``.\nvariations_value : list, optional\n    List of all parameter variation values. For example, ``[\"22cel\", \"100\"]``.\n    The default is ``None``.\nrenormalization : bool, optional\n    Perform renormalization before export.\n    The default is ``False``.\nimpedance : float, optional\n    Real impedance value in ohm, for renormalization, if not specified considered 50 ohm.\n    The default is ``None``.\ngamma_impedance_comments : bool, optional\n    Include Gamma and Impedance values in comments.\n    The default is ``False``.\n\nReturns\n-------\nstr\n    Filename when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oDesign.ExportNetworkData"
+    },
+    {
+      "name": "Hfss.export_convergence",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1100,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, setup: 'str', variations: 'str' = '', output_file: 'str' = None) -> 'str'",
+      "docstring": "Export a solution convergence to a file.\n\nParameters\n----------\nsetup : str\n    Setup name. For example, ``'Setup1'``.\nvariations : str\n    Variation string with values. For example, ``'radius=3mm'``.\noutput_file : str, optional\n    Full path to the PROF file. The default is ``None``, in which\n    case the working directory is used.\n\n\nReturns\n-------\nstr\n    Output file path if created.\n\nReferences\n----------\n>>> oModule.ExportConvergence"
+    },
+    {
+      "name": "Hfss.export_mesh_stats",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 376,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, setup: 'str', variations: 'str' = '', output_file: 'str' = None) -> 'str'",
+      "docstring": "Export mesh statistics to a file.\n\nParameters\n----------\nsetup : str\n    Setup name.\nvariations : str, optional\n    Variation list. The default is ``\"\"``.\noutput_file : str, optional\n    Full path to the mesh statistics file. The default is ``None``, in which\n    caswe the working directory is used.\n\nReturns\n-------\nstr\n    File path to the mesh statistics file.\n\nReferences\n----------\n>>> oDesign.ExportMeshStats"
+    },
+    {
+      "name": "Hfss.export_profile",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1968,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, setup: str, variation: str = '', output_file: str = None) -> str",
+      "docstring": "Export a solution profile to a PROF file.\n\nParameters\n----------\nsetup : str\n    Setup name. For example, ``'Setup1'``.\nvariation : str\n    Variation string with values. For example, ``'radius=3mm'``.\noutput_file : str, optional\n    Full path to the PROF file. The default is ``None``, in which case\n    the working directory is used.\n\n\nReturns\n-------\nstr\n    File path if created.\n\nReferences\n----------\n>>> oDesign.ExportProfile"
+    },
+    {
+      "name": "Hfss.export_results",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 851,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, export_folder: 'str' = None, matrix_name: 'str' = 'Original', matrix_type: 'str' = 'S', touchstone_format: 'str' = 'MagPhase', touchstone_number_precision: 'int' = 15, length: 'str' = '1meter', impedance: 'float' = 50, include_gamma_comment: 'bool' = True, support_non_standard_touchstone_extension: 'bool' = False, variations: 'list' = None) -> 'list[str]'",
+      "docstring": "Export all available reports to a file, including profile, and convergence and sNp when applicable.\n\nParameters\n----------\nexport_folder : str, optional\n    Full path to the project folder. The default is ``None``, in which case the\n    working directory is used.\nmatrix_name : str, optional\n    Matrix to specify to export touchstone file.\n    The default is ``Original``, in which case default matrix is taken.\n    This argument applies only to 2DExtractor and Q3D setups where Matrix reduction is computed\n    and needed to export touchstone file.\nmatrix_type : str, optional\n    Type of matrix to export. The default is ``S`` to export a touchstone file.\n    Available values are ``S``, ``Y``, ``Z``.  ``Y`` and ``Z`` matrices will be exported as tab file.\ntouchstone_format : str, optional\n    Touchstone format. The default is ``MagPahse``.\n    Available values are: ``MagPahse``, ``DbPhase``, ``RealImag``.\nlength : str, optional\n    Length of the model to export. The default is ``1meter``.\nimpedance : float, optional\n    Real impedance value in ohms, for renormalization. The default is ``50``.\ntouchstone_number_precision : int, optional\n    Touchstone number of digits precision. The default is ``15``.\ninclude_gamma_comment : bool, optional\n    Specifies whether to include Gamma and Impedance comments. The default is ``True``.\nsupport_non_standard_touchstone_extension : bool, optional\n    Specifies whether to support non-standard Touchstone extensions for mixed reference impedance.\n    The default is ``False``.\nvariations : list, optional\n    List of variation values with units. The default is all variations.\n\nReturns\n-------\nlist\n    List of all exported files.\n\nReferences\n----------\n>>> oModule.GetAllPortsList\n>>> oDesign.ExportProfile\n>>> oModule.ExportToFile\n>>> oModule.ExportConvergence\n>>> oModule.ExportNetworkData"
+    },
+    {
+      "name": "Hfss.get_antenna_data",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 6215,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, frequencies: 'float | list | None' = None, setup: 'str | None' = None, sphere: 'str | None' = None, variations: 'dict | None' = None, overwrite: 'bool | None' = True, link_to_hfss: 'bool | None' = True, export_touchstone: 'bool | None' = True, set_phase_center_per_port: 'bool | None' = True) -> \"'FfdSolutionDataExporter | FfdSolutionData | bool'\"",
+      "docstring": "Export the antenna parameters to Far Field Data (FFD) files and return an\ninstance of the ``FfdSolutionDataExporter`` object.\n\nFor phased array cases, only one phased array is calculated.\n\nParameters\n----------\nfrequencies : float or list of float or str, optional\n    Frequency value or list of frequencies to compute far field data. The default is ``None,`` in which case\n    all available frequencies are computed.\nsetup : str, optional\n    Name of the setup to use. The default is ``None,`` in which case ``nominal_adaptive`` is used.\nsphere : str, optional\n    Infinite sphere to use. The default is ``None``, in which case an existing sphere is used or a new\n    one is created.\nvariations : dict, optional\n    Variation dictionary. The default is ``None``, in which case the nominal variation is exported.\noverwrite : bool, optional\n    Whether to overwrite FFD files. The default is ``True``.\nlink_to_hfss : bool, optional\n    Whether to return an instance of the\n    :class:`ansys.aedt.core.visualization.advanced.farfield_exporter.FfdSolutionDataExporter` class,\n    which requires a connection to an instance of the :class:`Hfss` class.\n    The default is ``True``. If ``False``, returns an instance of\n    :class:`ansys.aedt.core.visualization.advanced.farfield_visualization.FfdSolutionData` class, which is\n    independent of the running HFSS instance.\nexport_touchstone : bool, optional\n    Whether to export touchstone file. The default is ``True``.\nset_phase_center_per_port : bool, optional\n    Set phase center per port location. The default is ``True``.\n\nReturns\n-------\n:class:`ansys.aedt.core.visualization.advanced.farfield_visualization.FfdSolutionDataExporter` or\n:class:`ansys.aedt.core.visualization.advanced.farfield_visualization.FfdSolutionData` or bool\n    SolutionData object or False if frequencies could not be obtained."
+    },
+    {
+      "name": "Hfss.release_desktop",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 3113,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, close_projects: bool = True, close_desktop: bool = True) -> bool",
+      "docstring": "Release AEDT.\n\nParameters\n----------\nclose_projects : bool, optional\n    Whether to close all projects. The default is ``True``.\nclose_desktop : bool, optional\n    Whether to close AEDT after releasing it. The default is ``True``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "Hfss.project_file",
+      "kind": "property",
+      "source": "ansys/aedt/core/application/design.py",
+      "line": 1067,
+      "source_sha256": "814e985c3e811f4647036863ff4d7fea146b231476675233e94a58a8e533ff1a",
+      "docstring": "Project name and path.\n\nReturns\n-------\nstr\n    Full absolute name and path for the project."
+    },
+    {
+      "name": "Hfss.design_name",
+      "kind": "property",
+      "source": "ansys/aedt/core/application/design.py",
+      "line": 862,
+      "source_sha256": "814e985c3e811f4647036863ff4d7fea146b231476675233e94a58a8e533ff1a",
+      "docstring": "Design name.\n\nReturns\n-------\nstr\n    Name of the parent AEDT design.\n\nReferences\n----------\n>>> oDesign.GetName\n>>> oDesign.RenameDesignInstance"
+    },
+    {
+      "name": "Hfss.existing_analysis_sweeps",
+      "kind": "property",
+      "source": "ansys/aedt/core/application/analysis.py",
+      "line": 485,
+      "source_sha256": "5d6a25796d959fdb9401417738184eba3eb6d330eff8d8de598af3da87665f1b",
+      "docstring": "Existing analysis sweeps.\n\nReturns\n-------\nlist of str\n    List of all analysis sweeps in the design.\n\nReferences\n----------\n>>> oModule.GelAllSolutionNames\n>>> oModule.GetSweeps"
+    },
+    {
+      "name": "Hfss.excitation_names",
+      "kind": "property",
+      "source": "ansys/aedt/core/application/analysis.py",
+      "line": 616,
+      "source_sha256": "5d6a25796d959fdb9401417738184eba3eb6d330eff8d8de598af3da87665f1b",
+      "docstring": "Get all excitation names.\n\nReturns\n-------\nlist\n    List of excitation names. Excitations with multiple modes will return one\n    excitation for each mode.\n\nReferences\n----------\n>>> oModule.GetExcitations"
+    },
+    {
+      "name": "Hfss.field_setup_names",
+      "kind": "property",
+      "source": "ansys/aedt/core/hfss.py",
+      "line": 317,
+      "source_sha256": "fa4f8767929fa47ad044980c3436d4b7d4f66c1444b6a84223cb968f05fd5dfb",
+      "docstring": "List of AEDT radiation field names.\n\nReturns\n-------\nList of str"
+    },
+    {
+      "name": "Desktop.release_desktop",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2321,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, close_projects: 'bool | None' = True, close_on_exit: 'bool | None' = True) -> 'bool'",
+      "docstring": "Release AEDT.\n\nParameters\n----------\nclose_projects : bool, optional\n    Whether to close the AEDT projects that are open in the session.\n    The default is ``True``.\nclose_on_exit : bool, optional\n    Whether to close the active AEDT session on exiting AEDT.\n    The default is ``True``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "PostProcessor3D.get_solution_data",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1862,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup_sweep_name: 'str | None' = None, domain: 'str | None' = None, variations: 'dict | None' = None, primary_sweep_variable: 'str | None' = None, report_category: 'str | None' = None, context: 'str | dict | None' = None, subdesign_id: 'int | None' = None, polyline_points: 'int' = 1001, math_formula: 'str | None' = None) -> 'SolutionData | bool'",
+      "docstring": "Get a simulation result from a solved setup and cast it in a ``SolutionData`` object.\n\nData to be retrieved from Electronics Desktop are any simulation results available in that\nspecific simulation context.\nMost of the argument have some defaults which works for most of the ``Standard`` report quantities.\n\nParameters\n----------\nexpressions : str or list, optional\n    One or more formulas to add to the report. Example is value ``\"dB(S(1,1))\"`` or a list of values.\n    Default is ``None`` which returns all traces.\nsetup_sweep_name : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\ndomain : str, optional\n    Plot Domain. Options are \"Sweep\" for frequency domain related results and \"Time\" for transient related data.\nvariations : dict, optional\n    Dictionary of all families including the primary sweep.\n    The default is ``None`` which uses the nominal variations of the setup.\nprimary_sweep_variable : str, optional\n    Name of the primary sweep. The default is ``\"None\"`` which, depending on the context,\n    internally assigns the primary sweep to:\n    1. ``Freq`` for frequency domain results,\n    2. ``Time`` for transient results,\n    3. ``Theta`` for radiation patterns,\n    4. ``distance`` for field plot over a polyline.\nreport_category : str, optional\n    Category of the Report to be created. If ``None`` default data Report is used.\n    The Report Category can be one of the types available for creating a report depend on the simulation setup.\n    For example for a Far Field Plot in HFSS the UI shows the report category as \"Create Far Fields Report\".\n    The report category is \"Far Fields\" in this case.\n    Depending on the setup different categories are available.\n    If ``None`` default category is used (the first item in the Results drop down menu in AEDT).\n    To get the list of available categories user can use method ``available_report_types``.\ncontext : str, dict, optional\n    This is the context of the report.\n    The default is ``None``. It can be:\n    1. `None`\n    2. ``\"Differential Pairs\"``\n    3. Reduce Matrix Name for Q2d/Q3d solution\n    4. Infinite Sphere name for Far Fields Plot.\n    5. Dictionary. If dictionary is passed, key is the report property name and value is property value.\n    6. For Maxwell 2D/3D eddy current solution types, this can be provided as a dictionary,\n    where the key is the matrix name and value the reduced matrix.\nsubdesign_id : int, optional\n    Subdesign ID for exporting a Touchstone file of this subdesign.\n    This parameter is valid for ``Circuit`` only.\n    The default value is ``None``.\npolyline_points : int, optional\n    Number of points on which to create the report for plots on polylines.\n    This parameter is valid for ``Fields`` plot only.\nmath_formula : str, optional\n    One of the available AEDT mathematical formulas to apply. For example, ``abs, dB``.\n\n\nReturns\n-------\n:class:`ansys.aedt.core.visualization.post.solution_data.SolutionData`\n    Solution Data object.\n\nReferences\n----------\n>>> oModule.GetSolutionDataPerVariation"
+    },
+    {
+      "name": "PostProcessor3D.create_report",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1637,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup_sweep_name: 'str' = None, domain: 'str' = 'Sweep', variations: 'dict' = None, primary_sweep_variable: 'str' = None, secondary_sweep_variable: 'str' = None, report_category: 'str' = None, plot_type: 'str' = 'Rectangular Plot', context: 'str | dict' = None, subdesign_id: 'int' = None, polyline_points: 'int' = 1001, plot_name: 'str' = None, matplotlib: 'bool' = False, show: 'bool' = True, hide_legend: 'bool' = False, snapshot_path: 'str' = None, width: 'int' = 800, height: 'int' = 450) -> 'Standard | AMIEyeDiagram | AMIConturEyeDiagram | EMIReceiver | EyeDiagram | CircuitNetlistReport | Fields | FarField | NearField | Spectral | ReportPlotter | bool'",
+      "docstring": "Create a report in AEDT or in Matplotlib. It can be a 2D plot, 3D plot, polar plot, or a data table.\n\nParameters\n----------\nexpressions : str or list, optional\n    One or more formulas to add to the report. Example is value = ``\"dB(S(1,1))\"``.\nsetup_sweep_name : str, optional\n    Setup name with the sweep. The default is ``None``, in which case the first setup and sweep is selected.\n    For Circuit Netlist designs only, specify the solution name as listed in\n    :class:`ansys.aedt.core.generic.aedt_constants.CircuitNetlistConstants`.\ndomain : str, optional\n    Plot Domain. Options are \"Sweep\", \"Time\", \"DCIR\".\nvariations : dict, optional\n    Dictionary of all families including the primary sweep. The default is ``{\"Freq\": [\"All\"]}``.\nprimary_sweep_variable : str, optional\n    Name of the primary sweep. The default is ``\"Freq\"``.\nsecondary_sweep_variable : str, optional\n    Name of the secondary sweep variable in 3D Plots.\nreport_category : str, optional\n    Category of the Report to be created. If `None` default data Report is used.\n    The Report Category can be one of the types available for creating a report depend on the simulation setup.\n    For example for a Far Field Plot in HFSS the UI shows the report category as \"Create Far Fields Report\".\n    The report category is \"Far Fields\" in this case.\n    Depending on the setup different categories are available.\n    If ``None`` default category is used (the first item in the Results drop down menu in AEDT).\nplot_type : str, optional\n    The format of Data Visualization. Default is ``Rectangular Plot``.\ncontext : str, dict, optional\n    The default is ``None``.\n    - For HFSS 3D Layout, options are ``\"Bondwires\"``, ``\"Differential Pairs\"``,\n    ``None``, ``\"Probes\"``, ``\"RL\"``, ``\"Sources\"``, and ``\"Vias\"``.\n    - For Q2D or Q3D, specify the name of a reduced matrix.\n    - For a far fields plot, specify the name of an infinite sphere.\n    - For Maxwell 2D/3D Eddy Current solution types this can be provided as a dictionary\n    where the key is the matrix name and value the reduced matrix.\n    - For Circuit Design, this can provide the plots' time range as a dictionary\n    where the keys are ``\"time_start\"`` and ``\"time_stop\"``.\n    By default ``\"time_start\"`` is 0ps and the ``\"time_stop\"`` is 10ns.\n    - For TDR analysis some dictionary options are \"pulse_rise_time\",\"step_time\",\n    \"time_windowing\",\"maximum_time\",\"use_pulse_in_tdr\",\"differential_pairs\". The default values\n    are as they appear manually in the UI.\nplot_name : str, optional\n    Name of the plot. The default is ``None``.\npolyline_points : int, optional,\n    Number of points to create the report for plots on polylines on.\nsubdesign_id : int, optional\n    Specify a subdesign ID to export a Touchstone file of this subdesign. Valid for Circuit Only.\n    The default value is ``None``.\nmatplotlib : bool, optional\n    Whether to use AEDT or ReportPlotter to generate the plot. Eye diagrams are not supported.\nshow : bool, optional\n    Whether to show the plot when using ReportPlotter. The default is ``True``.\n    If matplotlib is ``False``, this parameter is ignored.\nhide_legend : bool, optional\n    Whether to hide the legend when using AEDT reporter. The default is ``False``.\nsnapshot_path : str, optional\n    Full path to image file if a snapshot is needed.\n    The default is ``None``.\nwidth : int, optional\n    Snapshot image width. Default is ``800`` which takes Desktop size or 800 pixel.\nheight : int, optional\n    Snapshot image height. Default is ``450`` which takes Desktop size or 450 pixel.\n\nReturns\n-------\n:class:`report_standard.Standard`\n    ``True`` when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oModule.CreateReport"
+    },
+    {
+      "name": "PostProcessor3D.available_report_solutions",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 620,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, report_category: 'str' = None) -> 'list'",
+      "docstring": "Get the list of available solutions that can be used for the reports.\n\nThis list differs from the one obtained with ``app.existing_analysis_sweeps``,\nbecause it includes additional elements like \"AdaptivePass\".\n\nParameters\n----------\nreport_category : str, optional\n    Report Category. Default is ``None`` which takes default category.\n\nReturns\n-------\nlist\n\nReferences\n----------\n>>> oModule.GetAvailableSolutions"
+    },
+    {
+      "name": "PostProcessor3D.available_report_quantities",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 349,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, report_category: 'str' = None, display_type: 'str' = None, solution: 'str' = None, quantities_category: 'str' = None, context: 'str | dict' = None, is_siwave_dc: 'bool' = False, differential_pairs: 'bool' = False) -> 'list'",
+      "docstring": "Compute the list of all available report quantities of a given report quantity category.\n\nParameters\n----------\nreport_category : str, optional\n    Report Category. The default is ``None``, in which case the default category is used.\ndisplay_type : str, optional\n    Report Display Type.\n    The default is ``None``, in which case the default type is used.\n    In most of the cases the default type is \"Rectangular Plot\".\nsolution : str, optional\n    Report Setup.\n    The default is ``None``, in which case the first nominal adaptive solution is used.\nquantities_category : str, optional\n    The category that the quantities belong to.\n    It must be one of the ``available_quantities_categories`` method.\n    The default is ``None``, in which case the first default quantity is used.\ncontext : str, dict, optional\n    Report Context.\n    The default is ``None``, in which case the default context is used.\n    For Maxwell 2D/3D Eddy Current solution types this can be provided as a dictionary\n    where the key is the matrix name and value the reduced matrix.\nis_siwave_dc : bool, optional\n    Whether if the setup is SIwave DCIR or not. Default is ``False``.\ndifferential_pairs : bool, optional\n    Whether if return differential pairs traces or not. Default is ``False``.\n\nReturns\n-------\nlist\n\nReferences\n----------\n>>> oModule.GetAllQuantities"
+    },
+    {
+      "name": "PostProcessor3D.available_quantities_categories",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 261,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, report_category: 'str' = None, display_type: 'str' = None, solution: 'str' = None, context: 'str | dict' = None, is_siwave_dc: 'bool' = False) -> 'list'",
+      "docstring": "Compute the list of all available report categories.\n\nParameters\n----------\nreport_category : str, optional\n    Report category. The default is ``None``, in which case the first default category is used.\ndisplay_type : str, optional\n    Report display type. The default is ``None``, in which case the first default type\n     is used. In most cases, this default type is ``\"Rectangular Plot\"``.\nsolution : str, optional\n    Report setup. The default is ``None``, in which case the first\n    nominal adaptive solution is used.\ncontext : str, dict, optional\n    Report category. The default is ``None``, in which case the first default context\n    is used. For Maxwell 2D/3D eddy current solution types, the report category\n    can be provided as a dictionary, where the key is the matrix name and the value\n    the reduced matrix.\nis_siwave_dc : bool, optional\n    Whether the setup is SIwave DCIR. The default is ``False``.\n\nReturns\n-------\nlist\n\nReferences\n----------\n>>> oModule.GetAllCategories"
+    },
+    {
+      "name": "PostProcessor3D.export_report_to_csv",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1130,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, project_dir: 'str', plot_name: 'str', uniform: 'bool' = False, start: 'str' = None, end: 'str' = None, step: 'str' = None, use_trace_number_format: 'bool' = False) -> 'str'",
+      "docstring": "Export the 2D Plot data to a CSV file.\n\nThis method leaves the data in the plot (as data) as a reference\nfor the Plot after the loops.\n\nParameters\n----------\nproject_dir : str\n    Path to the project directory. The CSV file is plot_name.csv.\nplot_name : str\n    Name of the plot to export.\nuniform : bool, optional\n    Whether the export uniform points to the file. The\n    default is ``False``.\nstart : str, optional\n    Start range with units for the sweep if the ``uniform`` parameter\n    is set to ``True``.\nend : str, optional\n    End range with units for the sweep if the ``uniform`` parameter\n    is set to ``True``.\nstep : str, optional\n    Step range with units for the sweep if the ``uniform`` parameter is\n    set to ``True``.\nuse_trace_number_format : bool, optional\n    Whether to use trace number formats. The default is ``False``.\n\nReturns\n-------\nstr\n    Path of exported file.\n\nReferences\n----------\n>>> oModule.ExportReportDataToFile\n>>> oModule.ExportToFile\n>>> oModule.ExportUniformPointsToFile"
+    },
+    {
+      "name": "PostProcessor3D.export_report_to_file",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1038,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, output_dir: 'str', plot_name: 'str', extension: 'str', unique_file: 'bool' = False, uniform: 'bool' = False, start: 'str' = None, end: 'str' = None, step: 'str' = None, use_trace_number_format: 'bool' = False) -> 'str'",
+      "docstring": "Export a 2D Plot data to a file.\n\nThis method leaves the data in the plot (as data) as a reference\nfor the Plot after the loops.\n\nParameters\n----------\noutput_dir : str\n    Path to the directory of exported report\nplot_name : str\n    Name of the plot to export.\nextension : str\n    Extension of export , one of\n        * (CSV) .csv\n        * (Tab delimited) .tab\n        * (Post processor format) .txt\n        * (Ensight XY data) .exy\n        * (Anosft Plot Data) .dat\n        * (Ansoft Report Data Files) .rdat\nunique_file : bool\n    If set to True, generates unique file in output_dit\nuniform : bool, optional\n    Whether the export uniform points to the file. The\n    default is ``False``.\nstart : str, optional\n    Start range with units for the sweep if the ``uniform`` parameter\n    is set to ``True``.\nend : str, optional\n    End range with units for the sweep if the ``uniform`` parameter\n    is set to ``True``.\nstep : str, optional\n    Step range with units for the sweep if the ``uniform`` parameter is\n    set to ``True``.\nuse_trace_number_format : bool, optional\n    Whether to use trace number formats and use separate columns for curve. The default is ``False``.\n\nReturns\n-------\nstr\n    Path of exported file.\n\nReferences\n----------\n>>> oModule.ExportReportDataToFile\n>>> oModule.ExportUniformPointsToFile\n>>> oModule.ExportToFile"
+    },
+    {
+      "name": "PostProcessor3D.export_report_to_jpg",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1196,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, project_path: 'str', plot_name: 'str', width: 'int' = 800, height: 'int' = 450, image_format: 'str' = 'jpg') -> 'bool'",
+      "docstring": "Export plot to an image file.\n\nParameters\n----------\nproject_path : str\n    Path to the project directory or full path to the file.\nplot_name : str\n    Name of the plot to export.\nwidth : int, optional\n    Image width. Default is ``800`` which takes Desktop size or 800 pixel.\nheight : int, optional\n    Image height. Default is ``450`` which takes Desktop size or 450 pixel.\nimage_format : str, optional\n    Format of the image file. The default is ``\"jpg\"``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oModule.ExportImageToFile"
+    },
+    {
+      "name": "PostProcessor3D.create_report_from_configuration",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2020,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, input_file: 'str' = None, report_settings: 'dict' = None, solution_name: 'str' = None, name: 'str' = None, matplotlib: 'bool' = False, show: 'bool' = True, hide_legend: 'bool' = False, snapshot_path: 'str' = None, width: 'int' = 800, height: 'int' = 450) -> 'Standard | AMIEyeDiagram | AMIConturEyeDiagram | EMIReceiver | EyeDiagram | CircuitNetlistReport | Fields | FarField | NearField | Spectral | ReportPlotter | None | bool'",
+      "docstring": "Create a report based on a JSON file, TOML file, RPT file, or dictionary of properties.\n\nParameters\n----------\ninput_file : str, optional\n    Path to the JSON, TOML, or RPT file containing report settings.\nreport_settings : dict, optional\n    Dictionary containing report settings.\nsolution_name : str, optional\n    Setup name to use.\nname : str, optional\n    Report name. The default is ``None``, in which case the\n    default name is used.\nmatplotlib : bool, optional\n    Whether to use AEDT or ReportPlotter to generate the plot. Eye diagrams are not supported.\nshow : bool, optional\n    Whether to show the plot when using ReportPlotter. The default is ``True``.\n    If matplotlib is ``False``, this parameter is ignored.\nhide_legend : bool, optional\n    Whether to hide the legend when using AEDT reporter. The default is ``False``.\nsnapshot_path : str, optional\n    Full path to image file if a snapshot is needed.\n    The default is ``None``.\nwidth : int, optional\n    Image width. Default is ``800`` which takes Desktop size or 800 pixel.\nheight : int, optional\n    Image height. Default is ``450`` which takes Desktop size or 450 pixel.\n\nReturns\n-------\n:class:`ansys.aedt.core.modules.report_templates.Standard` or None\n    Report object if succeeded."
+    },
+    {
+      "name": "PostProcessor3D.delete_report",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 863,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, plot_name: 'str' = None) -> 'bool'",
+      "docstring": "Delete all reports or specific report.\n\nParameters\n----------\nplot_name : str, optional\n    Name of the plot to delete. The default  value is ``None`` and in this case, all reports are deleted.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oModule.DeleteReports"
+    },
+    {
+      "name": "PostProcessor3D.all_report_names",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/common.py",
+      "line": 786,
+      "source_sha256": "dbc32a76815e61f1424680f228e5ec9518cafbd44cba628688aa396e7af55a5b",
+      "docstring": "List of all report names.\n\nReturns\n-------\nlist\n\nReferences\n----------\n>>> oModule.GetAllReportNames()"
+    },
+    {
+      "name": "PostProcessor3D.available_report_types",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/common.py",
+      "line": 178,
+      "source_sha256": "dbc32a76815e61f1424680f228e5ec9518cafbd44cba628688aa396e7af55a5b",
+      "docstring": "Report types.\n\nReferences\n----------\n>>> oModule.GetAvailableReportTypes"
+    },
+    {
+      "name": "PostProcessor3D.create_fieldplot_surface",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1136,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, assignment: 'str | list[str] | list[FacePrimitive]', quantity: 'str', setup: 'str' = None, intrinsics: 'str | dict[str, str]' = None, plot_name: 'str' = None, field_type: 'str' = 'DC R/L Fields') -> 'FieldPlot'",
+      "docstring": "Create a field plot of surfaces.\n\nParameters\n----------\nassignment : list\n    List of surfaces to plot.\nquantity : str\n    Name of the quantity to plot.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n    If it is a dictionary, keys depend on the solution type and can be expressed in lower or camel case as:\n    - ``\"Freq\"`` or ``\"Frequency\"``.\n    - ``\"Time\"``.\n    - ``\"Phase\"``.\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nplot_name : str, optional\n    Name of the field plot to create.\nfield_type : str, optional\n    Field type to plot. Valid only for Q3D Field plots.\n\nReturns\n-------\n:class:``ansys.aedt.core.modules.solutions.FieldPlot``\n    Plot object.\n\nReferences\n----------\n>>> oModule.CreateFieldPlot"
+    },
+    {
+      "name": "PostProcessor3D.create_fieldplot_volume",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1295,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, assignment: 'str | list[str]', quantity: 'str', setup: 'str' = None, intrinsics: 'str | dict[str, str]' = None, plot_name: 'str' = None, field_type: 'str' = 'DC R/L Fields') -> 'FieldPlot'",
+      "docstring": "Create a field plot of volumes.\n\nParameters\n----------\nassignment : list\n    List of volumes to plot.\nquantity :\n    Name of the quantity to plot.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n    If it is a dictionary, keys depend on the solution type and can be expressed in lower or camel case as:\n    - ``\"Freq\"`` or ``\"Frequency\"``.\n    - ``\"Time\"``.\n    - ``\"Phase\"``.\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nplot_name : str, optional\n    Name of the field plot to create.\n\nReturns\n-------\n:class:``ansys.aedt.core.modules.solutions.FieldPlot``\n    Plot object.\n\nReferences\n----------\n>>> oModule.CreateFieldPlot"
+    },
+    {
+      "name": "PostProcessor3D.create_fieldplot_cutplane",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1205,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, assignment: 'str | list[str]', quantity: 'str', setup: 'str' = None, intrinsics: 'str | dict[str, str]' = None, plot_name: 'str' = None, filter_objects: 'list[str]' = None, field_type: 'str' = 'DC R/L Fields') -> 'FieldPlot'",
+      "docstring": "Create a field plot of cut planes.\n\nParameters\n----------\nassignment : list\n    List of cut planes to plot.\nquantity : str\n    Name of the quantity to plot.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive`` setup\n    is used. Be sure to build a setup string in the form of ``\"SetupName : SetupSweep\"``,\n    where ``SetupSweep`` is the sweep name to use in the export or ``LastAdaptive``.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n    If it is a dictionary, keys depend on the solution type and can be expressed in lower or camel case as:\n\n    - ``\"Freq\"`` or ``\"Frequency\"``.\n    - ``\"Time\"``.\n    - ``\"Phase\"``.\n\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nplot_name : str, optional\n    Name of the field plot to create.\nfilter_objects : list, optional\n    Objects list on which filter the plot.\n    The default value is ``None``, in which case an empty list is passed.\nfield_type : str, optional\n    Field type to plot. This parameter is valid only for Q3D field plots.\n\nReturns\n-------\n:class:``ansys.aedt.core.modules.solutions.FieldPlot``\n    Plot object.\n\nReferences\n----------\n>>> oModule.CreateFieldPlot"
+    },
+    {
+      "name": "PostProcessor3D.export_field_file",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 757,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, quantity: 'str', solution: 'str' = None, variations: 'dict[str, Any]' = None, output_file: 'str' = None, assignment: 'str' = 'AllObjects', objects_type: 'str' = 'Vol', intrinsics: 'str | dict[str, str]' = None, sample_points_file: 'str' = None, sample_points: 'list[list[float]]' = None, export_with_sample_points: 'bool' = True, reference_coordinate_system: 'str' = 'Global', export_in_si_system: 'bool' = True, export_field_in_reference: 'bool' = True) -> 'bool'",
+      "docstring": "Use the field calculator to create a field file based on a solution and variation.\n\nParameters\n----------\nquantity : str\n    Name of the quantity to export. For example, ``\"Temp\"``.\nsolution : str, optional\n    Name of the solution in the format ``\"solution: sweep\"``.\n    The default is ``None``.\nvariations : dict, optional\n    Dictionary of all variation variables with their values.\n    The default is ``None``.\noutput_file : str, optional\n    Full path and name to save the file to.\n    The default is ``None`` which export a file named ``\"<setup_name>.fld\"`` in working_directory.\nassignment : str, optional\n    List of objects to export. The default is ``\"AllObjects\"``.\nobjects_type : str, optional\n    Type of objects to export. The default is ``\"Vol\"``.\n    Options are ``\"Surf\"`` for surface and ``\"Vol\"`` for\n    volume.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n    If it is a dictionary, keys depend on the solution type and can be expressed in lower or camel case as:\n    - ``\"Freq\"`` or ``\"Frequency\"``\n    - ``\"Time\"``\n    - ``\"Phase\"``\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nsample_points_file : str, optional\n    Name of the file with sample points. The default is ``None``.\nsample_points : list, optional\n    List of the sample points. The default is ``None``.\nexport_with_sample_points : bool, optional\n    Whether to include the sample points in the file to export.\n    The default is ``True``.\nreference_coordinate_system : str, optional\n    Reference coordinate system in the file to export.\n    The default is ``\"Global\"``.\nexport_in_si_system : bool, optional\n    Whether the provided sample points are defined in the SI system or model units.\n    The default is ``True``.\nexport_field_in_reference : bool, optional\n    Whether to export the field in reference coordinate system.\n    The default is ``True``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oModule.EnterQty\n>>> oModule.CopyNamedExprToStack\n>>> oModule.CalcOp\n>>> oModule.EnterQty\n>>> oModule.EnterVol\n>>> oModule.CalculatorWrite\n>>> oModule.ExportToFile"
+    },
+    {
+      "name": "PostProcessor3D.export_field_file_on_grid",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 572,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, quantity: 'str', solution: 'str' = None, variations: 'dict[str, Any]' = None, file_name: 'str' = None, grid_type: 'str' = 'Cartesian', grid_center: 'list[float]' = None, grid_start: 'list[float]' = None, grid_stop: 'list[float]' = None, grid_step: 'list[float]' = None, is_vector: 'bool' = False, intrinsics: 'str | dict[str, str]' = None, export_with_sample_points: 'bool' = True, reference_coordinate_system: 'str' = 'Global', export_in_si_system: 'bool' = True, export_field_in_reference: 'bool' = True) -> 'str | bool'",
+      "docstring": "Use the field calculator to create a field file on a grid based on a solution and variation.\n\nParameters\n----------\nquantity : str\n    Name of the quantity to export. For example, ``\"Temp\"``.\nsolution : str, optional\n    Name of the solution in the format ``\"solution : sweep\"``. The default is ``None``.\nvariations : dict, optional\n    Dictionary of all variation variables with their values.\n    The default is ``None``.\nfile_name : str, optional\n    Full path and name to save the file to.\n    The default is ``None``, in which case the file is exported\n    to the working directory.\ngrid_type : str, optional\n    Type of the grid to export. The default is ``\"Cartesian\"``.\ngrid_center : list, optional\n    The ``[x, y, z]`` coordinates for the center of the grid.\n    The default is ``[0, 0, 0]``. This parameter is disabled if ``gridtype=\n    \"Cartesian\"``.\ngrid_start : list, optional\n    The ``[x, y, z]`` coordinates for the starting point of the grid.\n    The default is ``[0, 0, 0]``.\ngrid_stop : list, optional\n    The ``[x, y, z]`` coordinates for the stopping point of the grid.\n    The default is ``[0, 0, 0]``.\ngrid_step : list, optional\n    The ``[x, y, z]`` coordinates for the step size of the grid.\n    The default is ``[0, 0, 0]``.\nis_vector : bool, optional\n    Whether the quantity is a vector. The  default is ``False``.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n    If it is a dictionary, keys depend on the solution type and can be expressed in lower or camel case as:\n    - ``\"Freq\"`` or ``\"Frequency\"``.\n    - ``\"Time\"``.\n    - ``\"Phase\"``.\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nexport_with_sample_points : bool, optional\n    Whether to include the sample points in the file to export.\n    The default is ``True``.\nreference_coordinate_system : str, optional\n    Reference coordinate system in the file to export.\n    The default is ``\"Global\"``.\nexport_in_si_system : bool, optional\n    Whether the provided sample points are defined in the SI system or model units.\n    The default is ``True``.\nexport_field_in_reference : bool, optional\n    Whether to export the field in reference coordinate system.\n    The default is ``True``.\n\nReturns\n-------\nstr\n    Field file path when succeeded.\n\nReferences\n----------\n>>> oModule.EnterQty\n>>> oModule.CopyNamedExprToStack\n>>> oModule.CalcOp\n>>> oModule.EnterQty\n>>> oModule.EnterVol\n>>> oModule.ExportOnGrid"
+    },
+    {
+      "name": "PostProcessor3D.export_field_jpg",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1373,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, file_name: 'str', plot_name: 'str', folder_name: 'str', orientation: 'str' = 'isometric', width: 'int' = 1920, height: 'int' = 1080, display_wireframe: 'bool' = True, selections: 'list[str]' = None, show_axis: 'bool' = True, show_grid: 'bool' = True, show_ruler: 'bool' = True, show_region: 'str' = 'Default') -> 'bool'",
+      "docstring": "Export a field plot and coordinate system to a JPG file.\n\nParameters\n----------\nfile_name : str\n    Full path and name to save the JPG file to.\nplot_name : str\n    Name of the plot.\nfolder_name : str\n    Name of the folder plot.\norientation : str, optional\n    Name of the orientation to apply. The default is ``\"isometric\"``.\nwidth : int, optional\n    Plot Width. The default is ``1920``.\nheight : int, optional\n    Plot Height. The default is ``1080``.\ndisplay_wireframe : bool, optional\n    Display wireframe. The default is ``True``.\nselections : list, optional\n    List of objects to include in the plot.\n     Supported in 3D Field Plots only starting from 23R1.\nshow_axis : bool, optional\n    Whether to show the axes. The default is ``True``.\n    Supported in 3D Field Plots only starting from 23R1.\nshow_grid : bool, optional\n    Whether to show the grid. The default is ``True``.\n    Supported in 3D Field Plots only starting from 23R1.\nshow_ruler : bool, optional\n    Whether to show the ruler. The default is ``True``.\n    Supported in 3D Field Plots only starting from 23R1.\nshow_region : bool, optional\n    Whether to show the region or not. The default is ``Default``.\n    Supported in 3D Field Plots only starting from 23R1.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed.\n\nReferences\n----------\n>>> oModule.ExportPlotImageToFile\n>>> oModule.ExportModelImageToFile"
+    },
+    {
+      "name": "PostProcessor3D.get_scalar_field_value",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 429,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, quantity: 'str', scalar_function: 'str' = 'Maximum', solution: 'str' = None, variations: 'dict[str, Any]' = None, is_vector: 'bool' = False, intrinsics: 'str | dict[str, str]' = None, object_name: 'str' = 'AllObjects', object_type: 'str' = 'volume', adjacent_side: 'bool' = False) -> 'float'",
+      "docstring": "Use the field calculator to Compute Scalar of a Field.\n\nParameters\n----------\nquantity : str\n    Name of the quantity to export. For example, ``\"Temp\"``.\nscalar_function : str, optional\n    The name of the scalar function. For example, ``\"Maximum\"``, ``\"Integrate\"``.\n    The default is ``\"Maximum\"``.\nsolution : str, optional\n    Name of the solution in the format ``\"solution : sweep\"``. The default is ``None``.\nvariations : dict, optional\n    Dictionary of all variation variables with their values.\n    e.g. ``['power_block:=', ['0.6W'], 'power_source:=', ['0.15W']]``\n    The default is ``None``.\nis_vector : bool, optional\n    Whether the quantity is a vector. The  default is ``False``.\nintrinsics : dict, str, optional\n    Intrinsic variables required to compute the field before the export.\n    These are typically: frequency, time and phase.\n    It can be provided either as a dictionary or as a string.\n\n    If it is a dictionary, keys depend on the solution type and can be expressed as:\n    - ``\"Freq\"`` or ``\"Frequency\"``.\n    - ``\"Time\"``.\n    - ``\"Phase\"``.\n\n    If it is a string, it can either be ``\"Freq\"`` or ``\"Time\"`` depending on the solution type.\n    The default is ``None`` in which case the intrinsics value is automatically computed based on the setup.\nobject_name : str, optional\n    Name of the object. For example, ``\"Box1\"``.\n    The default is ``\"AllObjects\"``.\nobject_type : str, optional\n    Type of the object - ``\"volume\"``, ``\"surface\"``, ``\"point\"``.\n    The default is ``\"volume\"``.\nadjacent_side : bool, optional\n    To query quantity value on adjacent side for object_type = \"surface\", pass ``True``.\n    The default is ``False``.\n\nReturns\n-------\nfloat\n    Scalar field value.\n\nReferences\n----------\n>>> oModule.EnterQty\n>>> oModule.CopyNamedExprToStack\n>>> oModule.CalcOp\n>>> oModule.EnterQty\n>>> oModule.EnterVol\n>>> oModule.ClcEval\n>>> GetTopEntryValue"
+    },
+    {
+      "name": "Reports.standard",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2532,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup: 'str' = None) -> 'Standard'",
+      "docstring": "Create a standard or default report object.\n\nParameters\n----------\nexpressions : str or list\n    Expression List to add into the report. The expression can be any of the available formula\n    you can enter into the Electronics Desktop Report Editor.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\n\nReturns\n-------\n:class:`ansys.aedt.core.modules.report_templates.Standard`"
+    },
+    {
+      "name": "Reports.modal_solution",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2910,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup: 'str | None' = None) -> 'Standard'",
+      "docstring": "Create a Standard or Default Report object.\n\nParameters\n----------\nexpressions : str or list\n    Expression List to add into the report. The expression can be any of the available formula\n    you can enter into the Electronics Desktop Report Editor.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\n\nReturns\n-------\n:class:`ansys.aedt.core.modules.report_templates.Standard`"
+    },
+    {
+      "name": "Reports.terminal_solution",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2946,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup: 'str | None' = None) -> 'Standard'",
+      "docstring": "Create a Standard or Default Report object.\n\nParameters\n----------\nexpressions : str or list\n    Expression List to add into the report. The expression can be any of the available formula\n    you can enter into the Electronics Desktop Report Editor.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\n\nReturns\n-------\n:class:`ansys.aedt.core.modules.report_templates.Standard`"
+    },
+    {
+      "name": "Reports.far_field",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2775,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, setup: 'str | None' = None, sphere_name: 'str' = None, source_context: 'str' = None, **variations) -> 'FarField'",
+      "docstring": "Create a Far Field Report object.\n\nParameters\n----------\nexpressions : str or list\n    Expression List to add into the report. The expression can be any of the available formula\n    you can enter into the Electronics Desktop Report Editor.\nsetup : str, optional\n    Name of the setup. The default is ``None``, in which case the ``nominal_adaptive``\n    setup is used. Be sure to build a setup string in the form of\n    ``\"SetupName : SetupSweep\"``, where ``SetupSweep`` is the sweep name to\n    use in the export or ``LastAdaptive``.\nsphere_name : str, optional\n    Name of the sphere to create the far field on.\nsource_context : str, optional\n    Name of the active source to create the far field on.\n\nReturns\n-------\n:class:`ansys.aedt.core.modules.report_templates.FarField`"
+    },
+    {
+      "name": "SolutionData.get_expression_data",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 648,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expression: str = None, formula: str = 'real', convert_to_SI: bool = False, use_quantity: bool = False, sweeps: list | str = None) -> tuple[numpy.ndarray, numpy.ndarray]",
+      "docstring": "Retrieve the real part of the data for an expression.\n\nParameters\n----------\nexpression : str, None\n    Name of the expression. The default is ``None``,\n    in which case the active expression is used.\nformula : str, optional\n    Data type to be retrieved. Default is ``real``. Options are ``real``, ``imag``, ``mag``, ``magnitude``,\n    ``db10``, ``db20``, ``phase``, ``phaserad``.\nconvert_to_SI : bool, optional\n    Whether to convert the data to the SI unit system.\n    The default is ``False``.\nuse_quantity : bool, optional\n    Whether to output data in ``Quantity`` format or not.\n    It impacts on performances as it returns array of objects.\nsweeps : list, str, optional\n    List of sweeps to consider for the data retrieval.\n    The default is ``None``, which actually takes the primary sweep.\n\nReturns\n-------\n(np.array, np.array)\n    X and Y data for the expression."
+    },
+    {
+      "name": "SolutionData.export_data_to_csv",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 790,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, output: str, delimiter: str = ';') -> bool",
+      "docstring": "Save to output csv file the Solution Data.\n\nParameters\n----------\noutput : str,\n    Full path to csv file.\ndelimiter : str,\n    CSV Delimiter. Default is ``\";\"``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "SolutionData.plot",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 907,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, curves: list | str = None, formula: str = None, size: tuple = (1920, 1440), show_legend: bool = True, x_label: str = '', y_label: str = '', title: str = '', snapshot_path: str = None, is_polar: bool = False, show: bool = True) -> 'ReportPlotter'",
+      "docstring": "Create a matplotlib figure based on a list of data.\n\nParameters\n----------\ncurves : list\n    Curves to be plotted. The default is ``None``, in which case\n    the first curve is plotted.\nformula : str , optional\n    Mathematical formula to apply to the plot curve. The default is ``None``,\n    in which case only real value of the data stored in the solution data is plotted.\n    Options are ``\"abs\"``, ``\"db10\"``, ``\"db20\"``, ``\"im\"``, ``\"mag\"``, ``\"phasedeg\"``,\n    ``\"phaserad\"``, and ``\"re\"``.\nsize : tuple, optional\n    Image size in pixels (width, height).\nshow_legend : bool\n    Whether to show the legend. The default is ``True``.\n    This parameter is ignored if the number of curves to plot is\n    greater than 15.\nx_label : str\n    Plot X label.\ny_label : str\n    Plot Y label.\ntitle : str\n    Plot title label.\nsnapshot_path : str\n    Full path to image file if a snapshot is needed.\nis_polar : bool, optional\n    Set to `True` if this is a polar plot.\nshow : bool, optional\n    Whether if show the plot or not. Default is set to `True`.\n\nReturns\n-------\n:class:`ansys.aedt.core.visualization.plot.matplotlib.ReportPlotter`\n    Matplotlib class object."
+    },
+    {
+      "name": "SolutionData.set_active_variation",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 141,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, var_id: int = 0) -> bool",
+      "docstring": "Set the active variations to one of available variations in self.variations.\n\nParameters\n----------\nvar_id : int\n    Index of Variations to assign.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "SolutionData.primary_sweep",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 286,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Primary sweep.\n\nParameters\n----------\nps : float\n    Perimeter of the source."
+    },
+    {
+      "name": "SolutionData.primary_sweep_values",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 587,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Retrieve the primary sweep for a given data and primary variable.\n\nReturns\n-------\nnp.array\n    List of the primary sweep valid points for the expression."
+    },
+    {
+      "name": "SolutionData.expressions",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 309,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Expressions."
+    },
+    {
+      "name": "SolutionData.intrinsics",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 234,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Get intrinsics dictionary on active variation."
+    },
+    {
+      "name": "SolutionData.active_variation",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 77,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Retrieve active variation."
+    },
+    {
+      "name": "SolutionData.active_intrinsic",
+      "kind": "instance_attribute",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 43,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151"
+    },
+    {
+      "name": "SolutionData.enable_pandas_output",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 98,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Set/Get a flag to use Pandas to export dict and lists.\n\nThis applies to Solution data output.\nIf ``True`` the property or method will return a pandas object in CPython environment.\nDefault is ``False``.\n\nReturns\n-------\nbool"
+    },
+    {
+      "name": "SolutionData.units_sweeps",
+      "kind": "instance_attribute",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 43,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151"
+    },
+    {
+      "name": "SolutionData.units_data",
+      "kind": "instance_attribute",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 43,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151"
+    },
+    {
+      "name": "SolutionData.variations",
+      "kind": "instance_attribute",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 43,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151"
+    },
+    {
+      "name": "SolutionData.number_of_variations",
+      "kind": "instance_attribute",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 43,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151"
+    },
+    {
+      "name": "SolutionData.full_matrix_real_imag",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 461,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Get the full available solution data in Real and Imaginary parts.\n\nReturns\n-------\ntuple of dicts\n    (Real Dict, Imag Dict)"
+    },
+    {
+      "name": "SolutionData.full_matrix_mag_phase",
+      "kind": "property",
+      "source": "ansys/aedt/core/visualization/post/solution_data.py",
+      "line": 479,
+      "source_sha256": "63e28baf75e3a7f58eb86bf26aa3cfa157a70c15d72efd4857fa46a1ee0c7151",
+      "docstring": "Get the full available solution data magnitude and phase in radians.\n\nReturns\n-------\ntuple of dicts\n    (Mag Dict, Phase Dict)."
+    },
+    {
+      "name": "CommonReport.create",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 1716,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, name: 'str' = None) -> 'bool'",
+      "docstring": "Create a report.\n\nParameters\n----------\nname : str, optional\n    Name for the plot. The default is ``None``, in which case the\n    default name is used.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "CommonReport.get_solution_data",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2069,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self) -> 'SolutionData | bool'",
+      "docstring": "Get the report solution data.\n\nReturns\n-------\n:class:`ansys.aedt.core.visualization.post.solution_data.SolutionData` or bool\n    Solution data object."
+    },
+    {
+      "name": "CommonReport.export_config",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2035,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, output_file: 'str') -> 'bool'",
+      "docstring": "Generate a configuration file from active report.\n\nParameters\n----------\noutput_file : str\n    Full path to json file.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "CommonReport.edit_x_axis_scaling",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2492,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, linear_scaling: 'bool' = True, min_scale: 'str' = None, max_scale: 'str' = None, minor_tick_divs: 'int' = 5, min_spacing: 'str' = None, units: 'str' = None) -> 'bool'",
+      "docstring": "Edit the X-axis scaling settings.\n\nParameters\n----------\nlinear_scaling : bool, optional\n    Whether to use the linear scale. The default is ``True``.\n    When ``False``, the log scale is used.\nmin_scale : str, optional\n    Minimum scale value with units. The default is ``None``.\nmax_scale : str, optional\n    Maximum scale value with units. The default is ``None``.\nminor_tick_divs : int, optional\n    Minor tick division. The default is ``5``.\nmin_spacing : str, optional\n    Minimum spacing with units. The default is ``None``.\nunits : str, optional\n    Units in the plot. The default is ``None``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "CommonReport.edit_y_axis_scaling",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2731,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, name: 'str' = 'Y1', linear_scaling: 'bool' = True, min_scale: 'str' = None, max_scale: 'str' = None, minor_tick_divs: 'int' = 5, min_spacing: 'str' = None, units: 'str' = None) -> 'bool'",
+      "docstring": "Edit the Y-axis scaling settings.\n\nParameters\n----------\naxis name : str, optional\n    Axis name. The default is ``Y``.\nlinear_scaling : bool, optional\n    Whether to use the linear scale. The default is ``True``.\n    When ``False``, the log scale is used.\nmin_scale : str, optional\n    Minimum scale value with units. The default is ``None``.\nmax_scale : str, optional\n    Maximum scale value with units. The default is ``None``.\nminor_tick_divs : int, optional\n    Minor tick division. The default is ``5``.\nmin_spacing : str, optional\n    Minimum spacing with units. The default is ``None``.\nunits : str, optional\n    Units in the plot. The default is ``None``.\n\nReturns\n-------\nbool\n    ``True`` when successful, ``False`` when failed."
+    },
+    {
+      "name": "CommonReport.add_cartesian_y_marker",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 2294,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, value: 'str', name: 'str | None' = None, y_axis: 'int' = 1) -> 'str'",
+      "docstring": "Add a cartesian Y marker.\n\n.. note::\n   This method only works in graphical mode.\n\nParameters\n----------\nvalue : str, float\n    Value to apply with units.\nname : str, optional\n    Marker name. The default is ``None``.\ny_axis : str, optional\n    Y axis. The default is ``\"Y1\"``.\n\nReturns\n-------\nstr\n    Marker name if created."
+    },
+    {
+      "name": "SetupHFSS.get_solution_data",
+      "kind": "method",
+      "source": "ansys/aedt/core/generic/general_methods.py",
+      "line": 460,
+      "source_sha256": "1f7b7af67ebd4f6c2ae954cf2cf9e9ecf4a6371769d6845abd31a32ab1fc24fc",
+      "signature": "(self, expressions: 'str | list' = None, domain: 'str' = None, variations: 'dict' = None, primary_sweep_variable: 'str' = None, report_category: 'str' = None, context: 'str | dict' = None, polyline_points: 'int' = 1001, math_formula: 'str' = None, sweep: 'str' = None) -> \"'SolutionData'\"",
+      "docstring": "Get a simulation result from a solved setup and cast it in a ``SolutionData`` object.\n\nData to be retrieved from Electronics Desktop are any simulation results available in that\nspecific simulation context.\nMost of the argument have some defaults which works for most of the ``Standard`` report quantities.\n\nParameters\n----------\nexpressions : str or list, optional\n    One or more formulas to add to the report. Example is value ``\"dB(S(1,1))\"`` or a list of values.\n    Default is `None` which will return all traces.\ndomain : str, optional\n    Plot Domain. Options are \"Sweep\" for frequency domain related results and \"Time\" for transient related data.\nvariations : dict, optional\n    Dictionary of all families including the primary sweep.\n    The default is ``None`` which will use the nominal variations of the setup.\nprimary_sweep_variable : str, optional\n    Name of the primary sweep. The default is ``\"None\"`` which, depending on the context,\n    will internally assign the primary sweep to:\n    1. ``Freq`` for frequency domain results,\n    2. ``Time`` for transient results,\n    3. ``Theta`` for radiation patterns,\n    4. ``distance`` for field plot over a polyline.\nreport_category : str, optional\n    Category of the Report to be created. If `None` default data Report will be used.\n    The Report Category can be one of the types available for creating a report depend on the simulation setup.\n    For example for a Far Field Plot in HFSS the UI shows the report category as \"Create Far Fields Report\".\n    The report category will be in this case \"Far Fields\".\n    Depending on the setup different categories are available.\n    If `None` default category will be used (the first item in the Results drop down menu in AEDT).\n    To get the list of available categories user can use method ``available_report_types``.\ncontext : str, dict, optional\n    This is the context of the report.\n    The default is ``None``. It can be:\n    1. `None`\n    2. Infinite Sphere name for Far Fields Plot.\n    3. Dictionary. If dictionary is passed, key is the report property name and value is property value.\npolyline_points : int, optional\n    Number of points on which to create the report for plots on polylines.\n    This parameter is valid for ``Fields`` plot only.\nmath_formula : str, optional\n    One of the available AEDT mathematical formulas to apply. For example, ``abs, dB``.\nsweep : str, optional\n    Name of the sweep adaptive setup to get solutions from. the default is ``LastAdaptive``.\n\nReturns\n-------\n:class:`ansys.aedt.core.visualization.post.solution_data.SolutionData`\n    Solution Data object.\n\nReferences\n----------\n>>> oModule.GetSolutionDataPerVariation"
+    },
+    {
+      "name": "AnsysReport.__init__",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 304,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, version: str = '2026.1', design_name: str = 'design1', project_name: str = 'AnsysProject', template_json_file: str | None = None) -> None",
+      "docstring": "Initialize self.  See help(type(self)) for accurate signature."
+    },
+    {
+      "name": "AnsysReport.create",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 428,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, add_cover_page: bool = True, add_new_section_after: bool = True) -> bool",
+      "docstring": "Create a new report using ``report_specs`` properties."
+    },
+    {
+      "name": "AnsysReport.add_chapter",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 454,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, chapter_name: str) -> bool",
+      "docstring": "Add a new chapter."
+    },
+    {
+      "name": "AnsysReport.add_sub_chapter",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 469,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, chapter_name: str) -> bool",
+      "docstring": "Add a new sub-chapter."
+    },
+    {
+      "name": "AnsysReport.add_text",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 496,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, content: str, bold: bool = False, italic: bool = False) -> None",
+      "docstring": "Add a new text."
+    },
+    {
+      "name": "AnsysReport.add_image",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 512,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, path: str, caption: str = '', width: int = 0, height: int = 0) -> bool",
+      "docstring": "Add a new image."
+    },
+    {
+      "name": "AnsysReport.add_table",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 540,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, title: str, content: list[list], formatting: list | None = None, col_widths: list | None = None, full_width: bool = False) -> None",
+      "docstring": "Add a new table from a list of data."
+    },
+    {
+      "name": "AnsysReport.add_chart",
+      "kind": "method",
+      "source": "ansys/aedt/core/internal/checks.py",
+      "line": 563,
+      "source_sha256": "02ea2752296de9c6d4724e30c96eaf1fe23c70d5e9e59c8f10b4f9a6f46dce10",
+      "signature": "(self, x_values: list, y_values: list, x_caption: str, y_caption: str, title: str) -> None",
+      "docstring": "Add a chart to the report using matplotlib."
+    },
+    {
+      "name": "AnsysReport.save_pdf",
+      "kind": "method",
+      "source": "ansys/aedt/core/visualization/plot/pdf.py",
+      "line": 1245,
+      "source_sha256": "00f74df02b60711f0e7222a2d8fffdd5a1e58455c5b61e48090cd84d247a6e86",
+      "signature": "(self, file_path: str, file_name: str | None = None) -> str",
+      "docstring": "Save pdf."
+    }
+  ],
+  "legacy_probes": [
+    {
+      "name": "SolutionData.data_real",
+      "kind": "missing"
+    },
+    {
+      "name": "SolutionData.data_imag",
+      "kind": "missing"
+    },
+    {
+      "name": "SolutionData.data_magnitude",
+      "kind": "missing"
+    },
+    {
+      "name": "SolutionData.data_db20",
+      "kind": "missing"
+    },
+    {
+      "name": "SolutionData.data_phase",
+      "kind": "missing"
+    },
+    {
+      "name": "PostProcessorHFSS.get_antenna_data",
+      "kind": "missing"
+    }
+  ]
+}

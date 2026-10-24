@@ -1,0 +1,129 @@
+{
+  "id": "blc-baseline",
+  "title": "单节 3 dB 分支线耦合器",
+  "variant": "baseline",
+  "author": "Lavax",
+  "archived": "2026-10-10",
+  "software": "Ansys HFSS / AEDT 2026 R1",
+  "design": "BLC_Pipeline_Demo",
+  "units": "mm",
+  "material": {
+    "name": "RO4360G2",
+    "permittivity": 6.4,
+    "lossTangent": 0.0038
+  },
+  "parameters": {
+    "lmain": 4.927,
+    "lbranch": 5.061,
+    "wmain": 1.289,
+    "wbranch": 0.725,
+    "wfeed": 0.705,
+    "lfeed": 3,
+    "hsub": 0.508,
+    "board_w": 24,
+    "air_h": 8,
+    "port_w": 3.6,
+    "port_h": 3,
+    "f_start": 7.25,
+    "f_stop": 8.4,
+    "f_step": 0.025,
+    "f_center": 8,
+    "max_passes": 10,
+    "delta_s": 0.02
+  },
+  "board": {
+    "width": 10.927,
+    "height": 24,
+    "thickness": 0.508
+  },
+  "rects": [
+    {
+      "name": "Feed_P1",
+      "x": -5.4635,
+      "y": 2.178,
+      "width": 3,
+      "height": 0.705
+    },
+    {
+      "name": "Feed_P2",
+      "x": 2.4635,
+      "y": 2.178,
+      "width": 3,
+      "height": 0.705
+    },
+    {
+      "name": "Feed_P3",
+      "x": 2.4635,
+      "y": -2.883,
+      "width": 3,
+      "height": 0.705
+    },
+    {
+      "name": "Feed_P4",
+      "x": -5.4635,
+      "y": -2.883,
+      "width": 3,
+      "height": 0.705
+    },
+    {
+      "name": "Top_Main",
+      "x": -2.4635,
+      "y": 1.8860000000000001,
+      "width": 4.927,
+      "height": 1.289
+    },
+    {
+      "name": "Bot_Main",
+      "x": -2.4635,
+      "y": -3.175,
+      "width": 4.927,
+      "height": 1.289
+    },
+    {
+      "name": "Left_Branch",
+      "x": -2.8259999999999996,
+      "y": -2.5305,
+      "width": 0.725,
+      "height": 5.061
+    },
+    {
+      "name": "Right_Branch",
+      "x": 2.101,
+      "y": -2.5305,
+      "width": 0.725,
+      "height": 5.061
+    }
+  ],
+  "ports": [
+    {
+      "name": "P1",
+      "x": -5.4635,
+      "y": 2.5305,
+      "role": "输入"
+    },
+    {
+      "name": "P2",
+      "x": 5.4635,
+      "y": 2.5305,
+      "role": "直通"
+    },
+    {
+      "name": "P3",
+      "x": 5.4635,
+      "y": -2.5305,
+      "role": "耦合"
+    },
+    {
+      "name": "P4",
+      "x": -5.4635,
+      "y": -2.5305,
+      "role": "隔离"
+    }
+  ],
+  "download": {
+    "file": "blc_baseline.aedt",
+    "bytes": 140303,
+    "sha256": "99587334c0ac0c39a7a5ea7c6a09522f3ff75b41d6ef58d6bc39e1c2cdb71350",
+    "includesResults": false
+  }
+}

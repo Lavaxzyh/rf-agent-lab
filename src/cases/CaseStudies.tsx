@@ -3,6 +3,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import data from '../data/qr-grid-patch.json'
 import { isPanelEnabled, siteIdentity } from '../site-config'
+import BLCCase, { BLCArt } from './BLCCase'
+import QRDownloads from './QRDownloads'
 
 type CurveId = keyof typeof data.curves
 type SolverId = keyof typeof data.metrics
@@ -272,17 +274,21 @@ function SolverComparison() {
 export default function CaseStudies({ selected }: { selected: string | null }) {
   const detail = selected === slug
   const goTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
-  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = detail ? `二维码网格贴片天线复现 · Lavax | ${siteIdentity.name}` : `Case Studies · ${siteIdentity.name}`; return () => { document.title = siteIdentity.title } }, [detail])
+  useEffect(() => { document.getElementById('cases')?.scrollTo({ top: 0, behavior: 'instant' }); document.title = selected === 'blc-baseline' ? `单节分支线耦合器 · baseline | ${siteIdentity.name}` : detail ? `二维码网格贴片天线复现 · Lavax | ${siteIdentity.name}` : `Case Studies · ${siteIdentity.name}`; return () => { document.title = siteIdentity.title } }, [detail, selected])
+  if (selected === 'blc-baseline') return <BLCCase />
   if (selected && !detail) return <div className="panel-inner case-page"><h1>未找到这个案例</h1><a className="back-link" href="#cases">← Back to Case Studies</a></div>
-  if (!detail) return <div className="panel-inner case-page">
-    <div className="case-list-heading"><div><p className="eyebrow">02 / CASE STUDIES</p><h2>让复现过程<br /><em>有据可查。</em></h2></div><p>从工程参数到曲线比较，记录真实研究中的方法、结果与偏差。<span>Research by Lavax / AI-assisted engineering</span></p></div>
-    <a className="case-feature" href={`#/cases/${slug}`}><div className="case-cover"><PixelArt /><span className="cover-number">CASE / 001</span><span className="cover-label">MULTIBAND PATCH ANTENNA</span></div><div className="case-feature-copy"><div className="case-badges"><span>论文复现</span><span>AI 辅助</span><span>2026</span></div><h3>二维码网格贴片天线<br /><em>跨三种求解器的论文复现</em></h3><p>统一几何与材料，在 HFSS、CST 与 FEKO 中复现多频贴片结构，并与原论文实测曲线进行比较。</p><div className="feature-stats"><div><strong>3</strong><span>full-wave solvers</span></div><div><strong>2–7.5 <small>GHz</small></strong><span>comparison range</span></div><div><strong>72</strong><span>metallic pixels</span></div></div><span className="case-read">探索完整案例 <span>↗</span></span></div></a>
-    <p className="case-list-foot">01 RESEARCH CASE <span>以工程证据记录研究，而让结果持续接受检验。</span></p>
+  if (!detail) return <div className="panel-inner case-page case-gallery-page">
+    <h1 className="case-gallery-title">Case Studies</h1>
+    <div className="case-gallery-grid">
+    <a className="case-feature" href={`#/cases/${slug}`}><div className="case-cover"><PixelArt /><span className="cover-number">CASE / 001</span><span className="cover-label">MULTIBAND PATCH ANTENNA</span></div><div className="case-feature-copy"><div className="case-badges"><span>论文复现</span><span>AI 辅助</span><span>可下载</span></div><h3>二维码网格贴片天线</h3></div></a>
+    <a className="case-feature blc-gallery-card" href="#/cases/blc-baseline"><div className="case-cover"><BLCArt /><span className="cover-number">MODEL / 002</span><span className="cover-label">BRANCH-LINE COUPLER / BASELINE</span></div><div className="case-feature-copy"><div className="case-badges"><span>HFSS 模型</span><span>baseline</span><span>可下载</span></div><h3>单节 3 dB 分支线耦合器</h3></div></a>
+    </div>
   </div>
   return <div className="panel-inner case-page case-detail">
     <a className="back-link" href="#cases">← Back to Case Studies</a>
     <header className="case-hero"><div><p className="eyebrow">CASE / 001 · AI-ASSISTED REPRODUCTION</p><h1>二维码网格贴片天线<span>跨三种求解器的<em>论文复现。</em></span></h1><p className="case-lede">同一份论文，同一个终态结构。用三种全波数值方法，核对模型与结果之间的距离。</p><div className="case-badges"><span>Lavax · 复现与分析</span><span>工程归档 2026-08-04</span><span>HFSS / CST / FEKO</span></div></div><div className="case-hero-art"><PixelArt compact /></div></header>
     <SourceBlock />
+    <QRDownloads />
     <div className="case-overview-metrics"><div><span>COMPARISON RANGE</span><strong>2–7.5 <small>GHz</small></strong></div><div><span>HFSS FULL-BAND RMSE</span><strong>2.59 <small>dB</small></strong></div><div><span>HFSS RESONANCE MAE</span><strong>{oneDecimal(data.metrics.hfss.frequencyMAE)} <small>MHz</small></strong></div><div><span>SHARED GEOMETRY</span><strong>72 <small>pixels / 16 bridges</small></strong></div></div>
     <nav className="case-toc" aria-label="案例章节导航"><span>ON THIS PAGE</span>{[['case-structure', '01 结构'], ['case-results', '02 曲线'], ['case-solvers', '03 方法与指标'], ['case-discussion', '04 误差分析'], ['case-evidence', '05 工程依据']].map(([id, text]) => <button onClick={() => goTo(id)} key={id}>{text}</button>)}</nav>
     <section id="case-structure" className="case-section"><div className="case-section-heading"><span className="case-kicker">01 / SHARED GEOMETRY</span><h2>先建立共同的<em>工程对象。</em></h2><p>16 × 8 像素设计域保留 72 个单元，以 16 处旋转角点连接维持接触；层叠和材料沿用论文。</p></div><AntennaModel /></section>
@@ -299,7 +305,7 @@ export default function CaseStudies({ selected }: { selected: string | null }) {
       ['CST 2026.1', 'QR_Patch_CST_TD_WaveguidePort_20260728_v1.cst', 'FIT 时域 · 最终导出 S11'],
       ['FEKO 2026.0', 'QR_Patch_MoM_EdgePort_20260728_v3.cfx / .fek', 'MoM / SEP · 最终导出 S11'],
       ['课程论文 / Lavax', 'FDTD、MoM、FEM 二维码网格贴片天线课程论文', '方法、评价规则和结果分析依据'],
-    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开。课程论文原文件与三套软件工程保留在本地，本页暂不提供下载。AI 辅助复现属于研究实践，当前页面未声明 {siteIdentity.name} 已具备全流程自动化能力。</p></section>
+    ].map(([name, file, note]) => <div key={name}><strong>{name}</strong><span>{file}</span><small>{note}</small></div>)}</div><p className="case-small evidence-note">网页展示所需曲线与参数随静态页面公开，并提供三套软件的核心工程下载；完整结果与缓存目录、原论文及课程论文原文件不随下载包分发。AI 辅助复现属于研究实践，当前页面未声明 {siteIdentity.name} 已具备全流程自动化能力。</p></section>
     <footer className="case-end"><div><span className="case-kicker">FROM PAPER TO VERIFIED ENGINEERING</span><p>一次复现，是下一次自动化的依据。</p></div>{isPanelEnabled('paper2hfss') ? <a className="button button-quiet" href="#paper2hfss">了解 Paper2HFSS →</a> : <a className="button button-quiet" href="#cases">Back to Case Studies →</a>}</footer>
   </div>
 }

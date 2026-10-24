@@ -3,3 +3,5 @@ dist
 *.tsbuildinfo
 .DS_Store
 .local-preview/
+# Keep the original, unsanitized document bundle local; publish the reviewed sources.
+/docs/pyaedt-postprocessing-*.zip

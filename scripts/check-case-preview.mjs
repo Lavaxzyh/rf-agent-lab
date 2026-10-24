@@ -14,7 +14,8 @@ try {
   assert.equal(await page.title(), 'RF Agent Lab · Lavax')
   assert.equal(await page.locator('.topbar .brand > span').last().innerText(), 'RF Agent Lab')
   assert.equal(await page.locator('#hero h1 em').innerText(), 'RF Engineering.')
-  assert.deepEqual(await page.locator('.nav-links button').evaluateAll((buttons) => buttons.map((button) => button.getAttribute('aria-label'))), ['Go to mcp', 'Go to cases', 'Go to skills', 'Go to demos'])
+  const navigation = await page.locator('.nav-links button').evaluateAll((buttons) => buttons.map((button) => button.getAttribute('aria-label')))
+  assert.deepEqual(navigation.filter((name) => !['Go to docs', 'Go to paper2hfss'].includes(name)), ['Go to mcp', 'Go to cases', 'Go to skills', 'Go to demos'])
   for (const width of [1440, 834, 390, 320]) {
     await page.setViewportSize({ width, height: 900 })
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Hero document overflow at ${width}`)
@@ -25,12 +26,12 @@ try {
   await page.setViewportSize({ width: 1440, height: 1000 })
   assert.equal(await page.locator('.nav-github').getAttribute('href'), 'https://github.com/Lavaxzyh')
   await page.getByRole('button', { name: 'Go to skills', exact: true }).click()
-  assert.equal(await page.locator('#skills .eyebrow').innerText(), '03 / SKILLS GALLERY')
+  assert.equal(await page.locator('#skills h1').innerText(), 'Skills')
   assert.equal(await page.locator('#skills .skill-card').count(), 1)
   assert.equal(await page.locator('#skills .skill-card h3').innerText(), 'Codex Profile Switch')
   await page.screenshot({ path: '.local-preview/skills-real-project.png' })
   await page.getByRole('button', { name: 'Go to mcp', exact: true }).click()
-  assert.equal(await page.locator('#mcp .eyebrow').innerText(), '01 / MCP GALLERY')
+  assert.equal(await page.locator('#mcp h1').innerText(), 'MCP')
   assert.equal(await page.locator('#mcp .mcp-card h3').first().innerText(), 'ads-mcp')
   assert.equal(await page.locator('#mcp .mcp-card a').first().getAttribute('href'), 'https://github.com/Lavaxzyh/ads-mcp')
   assert.equal(await page.locator('#mcp .mcp-card-featured').count(), 1)
@@ -50,12 +51,12 @@ try {
     assert.equal(await page.evaluate(() => location.hash), '#hero')
   }
   await page.getByRole('button', { name: 'Go to cases', exact: true }).click()
-  await page.locator('.case-feature').waitFor()
+  await page.locator('a.case-feature[href="#/cases/qr-grid-patch"]').waitFor()
   assert.equal(await page.title(), 'Case Studies · RF Agent Lab')
-  assert.equal(await page.locator('#cases .eyebrow').innerText(), '02 / CASE STUDIES')
+  assert.equal(await page.locator('#cases h1').innerText(), 'Case Studies')
   assert.equal((await page.getByRole('button', { name: 'Go to cases', exact: true }).textContent()).trim(), 'Case Studies')
   await page.screenshot({ path: '.local-preview/cases-desktop.png' })
-  await page.locator('.case-feature').click()
+  await page.locator('a.case-feature[href="#/cases/qr-grid-patch"]').click()
   await page.locator('.case-source').waitFor()
   assert.equal(await page.title(), '二维码网格贴片天线复现 · Lavax | RF Agent Lab')
   assert.match(await page.locator('.case-source').innerText(), /10\.1109\/TAP\.2025\.3623329/)
@@ -91,17 +92,12 @@ try {
   await page.reload()
   await page.locator('.case-source').waitFor()
   await page.getByRole('link', { name: '← Back to Case Studies' }).click()
-  await page.locator('.case-feature').waitFor()
+  await page.locator('a.case-feature[href="#/cases/qr-grid-patch"]').waitFor()
   await page.goBack()
   await page.locator('.case-source').waitFor()
   await page.goForward()
-  await page.locator('.case-feature').waitFor()
-  if (docsEnabled) {
-    await page.getByRole('button', { name: 'Go to docs', exact: true }).click()
-    await page.getByRole('button', { name: '复现案例', exact: true }).click()
-    assert.equal(await page.locator('.article-row:visible').count(), 1)
-    await page.locator('.article-row:visible').click()
-  } else await page.locator('.case-feature').click()
+  await page.locator('a.case-feature[href="#/cases/qr-grid-patch"]').waitFor()
+  await page.locator('a.case-feature[href="#/cases/qr-grid-patch"]').click()
   await page.locator('.case-source').waitFor()
   for (const [name, width, height] of [['tablet', 834, 1112], ['mobile', 390, 844], ['narrow', 320, 740]]) {
     await page.setViewportSize({ width, height })
@@ -119,8 +115,12 @@ try {
     await page.locator('.mcp-card-featured').screenshot({ path: `.local-preview/mcp-${width}.png` })
   }
   if (docsEnabled) {
+    await page.goto(`${url}/#docs`)
+    await page.locator('.docs-project-card').waitFor()
+    assert.equal(await page.locator('.docs-project-card').count(), 1)
+    assert.equal(await page.locator('.article-row').count(), 0)
     await page.goto(`${url}/#/docs/hfss-automation-boundaries`)
-    await page.locator('.article-detail').waitFor()
+    await page.locator('.docs-not-found').waitFor()
   } else {
     for (const hash of ['#docs', '#/docs', '#/docs/hfss-automation-boundaries']) {
       await page.goto(`${url}/${hash}`)
@@ -131,11 +131,30 @@ try {
     assert.equal(await page.locator('a[href^="#/docs"], a[href="#docs"], a[href="#paper2hfss"]').count(), 0)
   }
   await page.getByRole('button', { name: 'Go to demos', exact: true }).click()
-  assert.equal(await page.locator('#demos .eyebrow').innerText(), '04 / VISUAL INTERACTION LAB')
+  assert.equal(await page.locator('#demos h1').innerText(), 'Visual Lab')
+  assert.equal(await page.locator('#skills .section-heading, #mcp .section-heading, #demos .section-heading, #demos .demo-intro, #demos .demo-coming').count(), 0)
   await page.locator('#demos canvas').waitFor()
   const staticFigure = await context.request.get(`${url}/cases/qr-grid-patch/s11-comparison.svg`)
   assert(staticFigure.ok(), 'Static scientific plot is missing')
   assert.match(await staticFigure.text(), /<svg/)
+  const compactPanels = [['mcp', '.mcp-grid'], ['skills', '.skills-grid'], ['cases', '.case-gallery-grid'], ['demos', '.demo-directory'], ...(docsEnabled ? [['docs', '.docs-directory-bar']] : [])]
+  for (const width of [1440, 834, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const [id, selector] of compactPanels) {
+      await page.getByRole('button', { name: `Go to ${id}`, exact: true }).click()
+      await page.locator(`#${id} ${selector}`).waitFor()
+      await page.locator(`#${id}`).evaluate((el) => el.scrollTo(0, 0))
+      const gap = await page.locator(`#${id} ${selector}`).evaluate((el) => el.getBoundingClientRect().top - document.querySelector('.topbar').getBoundingClientRect().bottom)
+      assert(gap >= 18 && gap <= 31, `${id}: compact top spacing at ${width}, got ${gap}`)
+      assert(await page.locator(`#${id}`).evaluate((el) => el.scrollWidth <= el.clientWidth), `${id}: panel overflow at ${width}`)
+      if (id === 'mcp') {
+        const layout = await page.locator('.mcp-card').evaluate((el) => ({ card: el.getBoundingClientRect().width, grid: el.parentElement.getBoundingClientRect().width, left: el.getBoundingClientRect().left, gridLeft: el.parentElement.getBoundingClientRect().left }))
+        assert(Math.abs(layout.left - layout.gridLeft) < 1, 'MCP must occupy the left column')
+        assert(width > 760 ? layout.card < layout.grid * .55 : Math.abs(layout.card - layout.grid) < 2, `MCP column count at ${width}`)
+      }
+      await page.screenshot({ path: `.local-preview/compact-${id}-${width}.png` })
+    }
+  }
   assert.deepEqual(errors, [], 'Uncaught page errors')
   console.log('PASS: real Skill only, pinned ads-mcp, hidden section routes, sources, model controls, curves, metrics, history, responsive layout, static SVG; screenshots in .local-preview')
 } finally { await browser.close() }

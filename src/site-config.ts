@@ -12,7 +12,7 @@ export const panelVisibility = {
   demos: true,
   paper2hfss: false,
   cases: true,
-  docs: false,
+  docs: true,
 }
 
 export type PanelId = keyof typeof panelVisibility

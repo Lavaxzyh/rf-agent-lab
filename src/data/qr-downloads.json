@@ -1,0 +1,58 @@
+[
+    {
+        "id":  "hfss",
+        "label":  "HFSS / FEM",
+        "revision":  "v1",
+        "software":  "HFSS / AEDT 2026 R1",
+        "archiveDate":  "2026-08-04",
+        "filename":  "qr-grid-patch-hfss-v1.zip",
+        "bytes":  61193,
+        "sha256":  "71ed98955a6a378f8df039a968ae14c31c9f4213df7b4141864ad2434c5de125",
+        "files":  [
+                      {
+                          "name":  "QR_Patch_FEM_ModalRegion_20260728_v1.aedt",
+                          "bytes":  711219,
+                          "sha256":  "38fadeb52722d59946b409a96bfd61b91d86ab15974ea496219607c57353f5c6"
+                      }
+                  ]
+    },
+    {
+        "id":  "cst",
+        "label":  "CST / FIT",
+        "revision":  "v1",
+        "software":  "CST 2026.1",
+        "archiveDate":  "2026-08-04",
+        "filename":  "qr-grid-patch-cst-v1.zip",
+        "bytes":  63932,
+        "sha256":  "901f8c824ca053b8a15c43b0672c38dca8cedf5e433d95b68195f49f87eb180e",
+        "files":  [
+                      {
+                          "name":  "QR_Patch_CST_TD_WaveguidePort_20260728_v1.cst",
+                          "bytes":  74396,
+                          "sha256":  "384a10d6ec895aee3a1f631d9634a8ea6887d9f64ff6f63e5b29500d4d3e8585"
+                      }
+                  ]
+    },
+    {
+        "id":  "feko",
+        "label":  "FEKO / MoM",
+        "revision":  "v3",
+        "software":  "FEKO 2026.0",
+        "archiveDate":  "2026-08-04",
+        "filename":  "qr-grid-patch-feko-v3.zip",
+        "bytes":  801048,
+        "sha256":  "9f64797a1bec1a2bc6a8707f4b93d1eb4c40bce40ced67e3ba1775c72a6a3e55",
+        "files":  [
+                      {
+                          "name":  "QR_Patch_MoM_EdgePort_20260728_v3.cfx",
+                          "bytes":  770528,
+                          "sha256":  "bb19c72725949b96a0d4284f61fc2ff3caa3d6623490502f494bf75fbaaa0a80"
+                      },
+                      {
+                          "name":  "QR_Patch_MoM_EdgePort_20260728_v3.fek",
+                          "bytes":  64474,
+                          "sha256":  "4fd1ed6ad36050929e1435c096b8c15cc85f32e2ab2dc86319041d382c9111bb"
+                      }
+                  ]
+    }
+]

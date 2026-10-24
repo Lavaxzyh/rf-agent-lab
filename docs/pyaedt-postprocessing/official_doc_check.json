@@ -1,0 +1,464 @@
+{
+  "checked_at_utc": "2026-10-13T04:29:42.946587+00:00",
+  "pyaedt_version": "1.9.0",
+  "package_entry": "[local environment path omitted]",
+  "scope": "Parameter names, order and defaults only; return annotations and AEDT execution not checked.",
+  "checks": [
+    {
+      "api": "PostProcessor3D.get_solution_data",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.get_solution_data.html",
+      "source_signature": "(self, expressions: 'str | list' = None, setup_sweep_name: 'str | None' = None, domain: 'str | None' = None, variations: 'dict | None' = None, primary_sweep_variable: 'str | None' = None, report_category: 'str | None' = None, context: 'str | dict | None' = None, subdesign_id: 'int | None' = None, polyline_points: 'int' = 1001, math_formula: 'str | None' = None) -> 'SolutionData | bool'",
+      "documented_parameters": [
+        "expressions: str | list = None",
+        "setup_sweep_name: str | None = None",
+        "domain: str | None = None",
+        "variations: dict | None = None",
+        "primary_sweep_variable: str | None = None",
+        "report_category: str | None = None",
+        "context: str | dict | None = None",
+        "subdesign_id: int | None = None",
+        "polyline_points: int = 1001",
+        "math_formula: str | None = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.create_report",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.create_report.html",
+      "source_signature": "(self, expressions: 'str | list' = None, setup_sweep_name: 'str' = None, domain: 'str' = 'Sweep', variations: 'dict' = None, primary_sweep_variable: 'str' = None, secondary_sweep_variable: 'str' = None, report_category: 'str' = None, plot_type: 'str' = 'Rectangular Plot', context: 'str | dict' = None, subdesign_id: 'int' = None, polyline_points: 'int' = 1001, plot_name: 'str' = None, matplotlib: 'bool' = False, show: 'bool' = True, hide_legend: 'bool' = False, snapshot_path: 'str' = None, width: 'int' = 800, height: 'int' = 450) -> 'Standard | AMIEyeDiagram | AMIConturEyeDiagram | EMIReceiver | EyeDiagram | CircuitNetlistReport | Fields | FarField | NearField | Spectral | ReportPlotter | bool'",
+      "documented_parameters": [
+        "expressions: str | list = None",
+        "setup_sweep_name: str = None",
+        "domain: str = 'Sweep'",
+        "variations: dict = None",
+        "primary_sweep_variable: str = None",
+        "secondary_sweep_variable: str = None",
+        "report_category: str = None",
+        "plot_type: str = 'Rectangular Plot'",
+        "context: str | dict = None",
+        "subdesign_id: int = None",
+        "polyline_points: int = 1001",
+        "plot_name: str = None",
+        "matplotlib: bool = False",
+        "show: bool = True",
+        "hide_legend: bool = False",
+        "snapshot_path: str = None",
+        "width: int = 800",
+        "height: int = 450"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.available_report_solutions",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.available_report_solutions.html",
+      "source_signature": "(self, report_category: 'str' = None) -> 'list'",
+      "documented_parameters": [
+        "report_category: str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.available_report_quantities",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.available_report_quantities.html",
+      "source_signature": "(self, report_category: 'str' = None, display_type: 'str' = None, solution: 'str' = None, quantities_category: 'str' = None, context: 'str | dict' = None, is_siwave_dc: 'bool' = False, differential_pairs: 'bool' = False) -> 'list'",
+      "documented_parameters": [
+        "report_category: str = None",
+        "display_type: str = None",
+        "solution: str = None",
+        "quantities_category: str = None",
+        "context: str | dict = None",
+        "is_siwave_dc: bool = False",
+        "differential_pairs: bool = False"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_report_to_csv",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_report_to_csv.html",
+      "source_signature": "(self, project_dir: 'str', plot_name: 'str', uniform: 'bool' = False, start: 'str' = None, end: 'str' = None, step: 'str' = None, use_trace_number_format: 'bool' = False) -> 'str'",
+      "documented_parameters": [
+        "project_dir: str",
+        "plot_name: str",
+        "uniform: bool = False",
+        "start: str = None",
+        "end: str = None",
+        "step: str = None",
+        "use_trace_number_format: bool = False"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_report_to_file",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_report_to_file.html",
+      "source_signature": "(self, output_dir: 'str', plot_name: 'str', extension: 'str', unique_file: 'bool' = False, uniform: 'bool' = False, start: 'str' = None, end: 'str' = None, step: 'str' = None, use_trace_number_format: 'bool' = False) -> 'str'",
+      "documented_parameters": [
+        "output_dir: str",
+        "plot_name: str",
+        "extension: str",
+        "unique_file: bool = False",
+        "uniform: bool = False",
+        "start: str = None",
+        "end: str = None",
+        "step: str = None",
+        "use_trace_number_format: bool = False"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_report_to_jpg",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_report_to_jpg.html",
+      "source_signature": "(self, project_path: 'str', plot_name: 'str', width: 'int' = 800, height: 'int' = 450, image_format: 'str' = 'jpg') -> 'bool'",
+      "documented_parameters": [
+        "project_path: str",
+        "plot_name: str",
+        "width: int = 800",
+        "height: int = 450",
+        "image_format: str = 'jpg'"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.create_report_from_configuration",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.create_report_from_configuration.html",
+      "source_signature": "(self, input_file: 'str' = None, report_settings: 'dict' = None, solution_name: 'str' = None, name: 'str' = None, matplotlib: 'bool' = False, show: 'bool' = True, hide_legend: 'bool' = False, snapshot_path: 'str' = None, width: 'int' = 800, height: 'int' = 450) -> 'Standard | AMIEyeDiagram | AMIConturEyeDiagram | EMIReceiver | EyeDiagram | CircuitNetlistReport | Fields | FarField | NearField | Spectral | ReportPlotter | None | bool'",
+      "documented_parameters": [
+        "input_file: str = None",
+        "report_settings: dict = None",
+        "solution_name: str = None",
+        "name: str = None",
+        "matplotlib: bool = False",
+        "show: bool = True",
+        "hide_legend: bool = False",
+        "snapshot_path: str = None",
+        "width: int = 800",
+        "height: int = 450"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.create_fieldplot_surface",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.create_fieldplot_surface.html",
+      "source_signature": "(self, assignment: 'str | list[str] | list[FacePrimitive]', quantity: 'str', setup: 'str' = None, intrinsics: 'str | dict[str, str]' = None, plot_name: 'str' = None, field_type: 'str' = 'DC R/L Fields') -> 'FieldPlot'",
+      "documented_parameters": [
+        "assignment: str | list[str] | list[FacePrimitive]",
+        "quantity: str",
+        "setup: str = None",
+        "intrinsics: str | dict[str, str] = None",
+        "plot_name: str = None",
+        "field_type: str = 'DC R/L Fields'"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.create_fieldplot_volume",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.create_fieldplot_volume.html",
+      "source_signature": "(self, assignment: 'str | list[str]', quantity: 'str', setup: 'str' = None, intrinsics: 'str | dict[str, str]' = None, plot_name: 'str' = None, field_type: 'str' = 'DC R/L Fields') -> 'FieldPlot'",
+      "documented_parameters": [
+        "assignment: str | list[str]",
+        "quantity: str",
+        "setup: str = None",
+        "intrinsics: str | dict[str, str] = None",
+        "plot_name: str = None",
+        "field_type: str = 'DC R/L Fields'"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_field_file",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_field_file.html",
+      "source_signature": "(self, quantity: 'str', solution: 'str' = None, variations: 'dict[str, Any]' = None, output_file: 'str' = None, assignment: 'str' = 'AllObjects', objects_type: 'str' = 'Vol', intrinsics: 'str | dict[str, str]' = None, sample_points_file: 'str' = None, sample_points: 'list[list[float]]' = None, export_with_sample_points: 'bool' = True, reference_coordinate_system: 'str' = 'Global', export_in_si_system: 'bool' = True, export_field_in_reference: 'bool' = True) -> 'bool'",
+      "documented_parameters": [
+        "quantity: str",
+        "solution: str = None",
+        "variations: dict[str, Any] = None",
+        "output_file: str = None",
+        "assignment: str = 'AllObjects'",
+        "objects_type: str = 'Vol'",
+        "intrinsics: str | dict[str, str] = None",
+        "sample_points_file: str = None",
+        "sample_points: list[list[float]] = None",
+        "export_with_sample_points: bool = True",
+        "reference_coordinate_system: str = 'Global'",
+        "export_in_si_system: bool = True",
+        "export_field_in_reference: bool = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_field_file_on_grid",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_field_file_on_grid.html",
+      "source_signature": "(self, quantity: 'str', solution: 'str' = None, variations: 'dict[str, Any]' = None, file_name: 'str' = None, grid_type: 'str' = 'Cartesian', grid_center: 'list[float]' = None, grid_start: 'list[float]' = None, grid_stop: 'list[float]' = None, grid_step: 'list[float]' = None, is_vector: 'bool' = False, intrinsics: 'str | dict[str, str]' = None, export_with_sample_points: 'bool' = True, reference_coordinate_system: 'str' = 'Global', export_in_si_system: 'bool' = True, export_field_in_reference: 'bool' = True) -> 'str | bool'",
+      "documented_parameters": [
+        "quantity: str",
+        "solution: str = None",
+        "variations: dict[str, Any] = None",
+        "file_name: str = None",
+        "grid_type: str = 'Cartesian'",
+        "grid_center: list[float] = None",
+        "grid_start: list[float] = None",
+        "grid_stop: list[float] = None",
+        "grid_step: list[float] = None",
+        "is_vector: bool = False",
+        "intrinsics: str | dict[str, str] = None",
+        "export_with_sample_points: bool = True",
+        "reference_coordinate_system: str = 'Global'",
+        "export_in_si_system: bool = True",
+        "export_field_in_reference: bool = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.export_field_jpg",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.export_field_jpg.html",
+      "source_signature": "(self, file_name: 'str', plot_name: 'str', folder_name: 'str', orientation: 'str' = 'isometric', width: 'int' = 1920, height: 'int' = 1080, display_wireframe: 'bool' = True, selections: 'list[str]' = None, show_axis: 'bool' = True, show_grid: 'bool' = True, show_ruler: 'bool' = True, show_region: 'str' = 'Default') -> 'bool'",
+      "documented_parameters": [
+        "file_name: str",
+        "plot_name: str",
+        "folder_name: str",
+        "orientation: str = 'isometric'",
+        "width: int = 1920",
+        "height: int = 1080",
+        "display_wireframe: bool = True",
+        "selections: list[str] = None",
+        "show_axis: bool = True",
+        "show_grid: bool = True",
+        "show_ruler: bool = True",
+        "show_region: str = 'Default'"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "PostProcessor3D.get_scalar_field_value",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.post_common_3d.PostProcessor3D.get_scalar_field_value.html",
+      "source_signature": "(self, quantity: 'str', scalar_function: 'str' = 'Maximum', solution: 'str' = None, variations: 'dict[str, Any]' = None, is_vector: 'bool' = False, intrinsics: 'str | dict[str, str]' = None, object_name: 'str' = 'AllObjects', object_type: 'str' = 'volume', adjacent_side: 'bool' = False) -> 'float'",
+      "documented_parameters": [
+        "quantity: str",
+        "scalar_function: str = 'Maximum'",
+        "solution: str = None",
+        "variations: dict[str, Any] = None",
+        "is_vector: bool = False",
+        "intrinsics: str | dict[str, str] = None",
+        "object_name: str = 'AllObjects'",
+        "object_type: str = 'volume'",
+        "adjacent_side: bool = False"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "SolutionData.get_expression_data",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.solution_data.SolutionData.get_expression_data.html",
+      "source_signature": "(self, expression: str = None, formula: str = 'real', convert_to_SI: bool = False, use_quantity: bool = False, sweeps: list | str = None) -> tuple[numpy.ndarray, numpy.ndarray]",
+      "documented_parameters": [
+        "expression: str = None",
+        "formula: str = 'real'",
+        "convert_to_SI: bool = False",
+        "use_quantity: bool = False",
+        "sweeps: list | str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "SolutionData.export_data_to_csv",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.solution_data.SolutionData.export_data_to_csv.html",
+      "source_signature": "(self, output: str, delimiter: str = ';') -> bool",
+      "documented_parameters": [
+        "output: str",
+        "delimiter: str = ';'"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "SolutionData.plot",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.solution_data.SolutionData.plot.html",
+      "source_signature": "(self, curves: list | str = None, formula: str = None, size: tuple = (1920, 1440), show_legend: bool = True, x_label: str = '', y_label: str = '', title: str = '', snapshot_path: str = None, is_polar: bool = False, show: bool = True) -> 'ReportPlotter'",
+      "documented_parameters": [
+        "curves: list | str = None",
+        "formula: str = None",
+        "size: tuple = (1920, 1440)",
+        "show_legend: bool = True",
+        "x_label: str = ''",
+        "y_label: str = ''",
+        "title: str = ''",
+        "snapshot_path: str = None",
+        "is_polar: bool = False",
+        "show: bool = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "SolutionData.set_active_variation",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.post.solution_data.SolutionData.set_active_variation.html",
+      "source_signature": "(self, var_id: int = 0) -> bool",
+      "documented_parameters": [
+        "var_id: int = 0"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.export_touchstone",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.export_touchstone.html",
+      "source_signature": "(self, setup: str | None = None, sweep: str | None = None, output_file: str | None = None, variations: list | None = None, variations_value: list | None = None, renormalization: bool = False, impedance: float | None = None, gamma_impedance_comments: bool = False) -> str | bool",
+      "documented_parameters": [
+        "setup: str | None = None",
+        "sweep: str | None = None",
+        "output_file: str | None = None",
+        "variations: list | None = None",
+        "variations_value: list | None = None",
+        "renormalization: bool = False",
+        "impedance: float | None = None",
+        "gamma_impedance_comments: bool = False"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.export_convergence",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.export_convergence.html",
+      "source_signature": "(self, setup: 'str', variations: 'str' = '', output_file: 'str' = None) -> 'str'",
+      "documented_parameters": [
+        "setup: str",
+        "variations: str = ''",
+        "output_file: str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.export_mesh_stats",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.export_mesh_stats.html",
+      "source_signature": "(self, setup: 'str', variations: 'str' = '', output_file: 'str' = None) -> 'str'",
+      "documented_parameters": [
+        "setup: str",
+        "variations: str = ''",
+        "output_file: str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.export_profile",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.export_profile.html",
+      "source_signature": "(self, setup: str, variation: str = '', output_file: str = None) -> str",
+      "documented_parameters": [
+        "setup: str",
+        "variation: str = ''",
+        "output_file: str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.get_antenna_data",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.get_antenna_data.html",
+      "source_signature": "(self, frequencies: 'float | list | None' = None, setup: 'str | None' = None, sphere: 'str | None' = None, variations: 'dict | None' = None, overwrite: 'bool | None' = True, link_to_hfss: 'bool | None' = True, export_touchstone: 'bool | None' = True, set_phase_center_per_port: 'bool | None' = True) -> \"'FfdSolutionDataExporter | FfdSolutionData | bool'\"",
+      "documented_parameters": [
+        "frequencies: float | list | None = None",
+        "setup: str | None = None",
+        "sphere: str | None = None",
+        "variations: dict | None = None",
+        "overwrite: bool | None = True",
+        "link_to_hfss: bool | None = True",
+        "export_touchstone: bool | None = True",
+        "set_phase_center_per_port: bool | None = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "Hfss.release_desktop",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.hfss.Hfss.release_desktop.html",
+      "source_signature": "(self, close_projects: bool = True, close_desktop: bool = True) -> bool",
+      "documented_parameters": [
+        "close_projects: bool = True",
+        "close_desktop: bool = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "SetupHFSS.get_solution_data",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/_autosummary/ansys.aedt.core.modules.solve_setup.SetupHFSS.get_solution_data.html",
+      "source_signature": "(self, expressions: 'str | list' = None, domain: 'str' = None, variations: 'dict' = None, primary_sweep_variable: 'str' = None, report_category: 'str' = None, context: 'str | dict' = None, polyline_points: 'int' = 1001, math_formula: 'str' = None, sweep: 'str' = None) -> \"'SolutionData'\"",
+      "documented_parameters": [
+        "expressions: str | list = None",
+        "domain: str = None",
+        "variations: dict = None",
+        "primary_sweep_variable: str = None",
+        "report_category: str = None",
+        "context: str | dict = None",
+        "polyline_points: int = 1001",
+        "math_formula: str = None",
+        "sweep: str = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "AnsysReport.create",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.plot.pdf.AnsysReport.create.html",
+      "source_signature": "(self, add_cover_page: bool = True, add_new_section_after: bool = True) -> bool",
+      "documented_parameters": [
+        "add_cover_page: bool = True",
+        "add_new_section_after: bool = True"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    },
+    {
+      "api": "AnsysReport.save_pdf",
+      "url": "https://aedt.docs.pyansys.com/version/stable/API/visualization/_autosummary/ansys.aedt.core.visualization.plot.pdf.AnsysReport.save_pdf.html",
+      "source_signature": "(self, file_path: str, file_name: str | None = None) -> str",
+      "documented_parameters": [
+        "file_path: str",
+        "file_name: str | None = None"
+      ],
+      "parameter_names_match": true,
+      "defaults_match": true,
+      "status": "match"
+    }
+  ]
+}
